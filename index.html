@@ -1,495 +1,334 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no"/>
 <title>القرآن الكريم</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Scheherazade+New:wght@400;500;600;700&family=Cinzel+Decorative:wght@400;700&family=Tajawal:wght@300;400;500;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Scheherazade+New:wght@400;500;600;700&family=Cairo:wght@300;400;600;700;900&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.2/babel.min.js"></script>
 <style>
-/* ============ RESET & ROOT ============ */
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 :root{
-  --em:#0b5e45;--em2:#0d7a5a;--em3:#10a070;--em4:#c8ede3;--em5:#f0faf6;
-  --gd:#b8831a;--gd2:#d4a030;--gd3:#f0c050;--gd4:#fff8e8;
-  --tl:#0a7a7a;--tl2:#0d9999;
-  --ink:#160e07;--ink2:#3a2a1a;--ink3:#7a6550;--ink4:#b8a890;
-  --bg:#faf6ee;--bg2:#f2ead8;--card:#ffffff;
-  --bdr:#ddd0b8;--bdr2:rgba(184,131,26,0.2);
-  --shd:rgba(11,94,69,0.12);
+  --bg:#f2ede4;--bg2:#e8e0d2;--bg3:#ddd5c4;
+  --card:#ffffff;--card2:#faf7f2;
+  --gold:#a07830;--gold2:#c09040;--gold3:#e0b060;--goldbg:#fdf5e4;
+  --green:#1a7048;--green2:#228855;--greenbg:#edf7f1;
+  --blue:#2060c0;--blue2:#3070d8;--bluebg:#eef4fd;
+  --purple:#6040a0;--purplebg:#f3effe;
+  --orange:#c06020;--orangebg:#fef3e8;
+  --teal:#0a8888;--tealbg:#e8f8f8;
+  --red:#b03020;
+  --ink:#1a1208;--ink2:#2e2010;--ink3:#6a5030;--ink4:#a89070;
+  --bdr:#d8ccb4;--bdr2:rgba(160,120,48,0.2);
+  --shd:rgba(80,50,10,0.08);
   --ar:'Scheherazade New',serif;
-  --ui:'Tajawal',sans-serif;
+  --ui:'Cairo',sans-serif;
   --en:'Lato',sans-serif;
-  --dsp:'Cinzel Decorative',cursive;
 }
 .dark{
-  --em:#12c988;--em2:#0fa870;--em3:#0d8a5c;--em4:#0a2a20;--em5:#0d1f18;
-  --gd:#e8b840;--gd2:#f0c850;--gd3:#ffd870;--gd4:#1a1400;
-  --tl:#15b8b8;--tl2:#10d0d0;
-  --ink:#f0e8d8;--ink2:#d0c0a8;--ink3:#907868;--ink4:#504030;
-  --bg:#0a1410;--bg2:#0e1c16;--card:#112018;
-  --bdr:#1e3028;--bdr2:rgba(232,184,64,0.15);
-  --shd:rgba(0,0,0,0.4);
+  --bg:#111008;--bg2:#181208;--bg3:#201808;
+  --card:#1e1808;--card2:#241e0e;
+  --gold:#d0a040;--gold2:#e0b850;--gold3:#f0d070;--goldbg:#1a1400;
+  --green:#30b070;--green2:#22cc88;--greenbg:#0a2018;
+  --blue:#5080e0;--blue2:#6090f0;--bluebg:#0a1428;
+  --purple:#9070e0;--purplebg:#18103a;
+  --orange:#e08040;--orangebg:#281408;
+  --teal:#20c0c0;--tealbg:#081e1e;
+  --red:#e04030;
+  --ink:#f0e8d0;--ink2:#d8c8a0;--ink3:#907040;--ink4:#504020;
+  --bdr:#302808;--bdr2:rgba(208,160,64,0.2);--shd:rgba(0,0,0,0.4);
 }
 html,body{height:100%;overflow:hidden;background:var(--bg)}
 body{font-family:var(--ui);color:var(--ink)}
 .app{max-width:430px;margin:0 auto;height:100dvh;display:flex;flex-direction:column;background:var(--bg);position:relative;overflow:hidden}
 
-/* ============ TOPBAR ============ */
-.topbar{
-  flex-shrink:0;z-index:60;
-  background:linear-gradient(135deg,var(--em) 0%,var(--em2) 55%,var(--tl) 100%);
-  padding:env(safe-area-inset-top,0) 0 0;
-}
-.topbar-inner{
-  display:flex;align-items:center;gap:8px;padding:10px 14px 11px;
-  position:relative;
-}
-.topbar-inner::after{
-  content:'';position:absolute;inset:0;
-  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='60'%3E%3Cpath d='M0 30Q30 0 60 30Q90 60 120 30' fill='none' stroke='rgba(255,255,255,0.04)' stroke-width='1'/%3E%3C/svg%3E") repeat-x center;
-  pointer-events:none;
-}
-.tb-btn{
-  width:38px;height:38px;border-radius:11px;flex-shrink:0;
-  display:flex;align-items:center;justify-content:center;
-  background:rgba(255,255,255,0.13);border:1px solid rgba(255,255,255,0.2);
-  cursor:pointer;font-size:18px;color:#fff;transition:all 0.18s;
-  position:relative;z-index:1;
-}
-.tb-btn:active{background:rgba(255,255,255,0.28);transform:scale(0.92)}
-.tb-mid{flex:1;text-align:center;position:relative;z-index:1;min-width:0}
-.tb-ar{font-family:var(--ar);font-size:22px;font-weight:600;color:#fff;line-height:1.25;text-shadow:0 1px 8px rgba(0,0,0,0.25);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.tb-en{font-family:var(--en);font-size:9.5px;color:rgba(255,255,255,0.68);letter-spacing:2.5px;text-transform:uppercase;margin-top:1px}
+/* ── TOPBAR ── */
+.topbar{flex-shrink:0;z-index:60;background:var(--card);border-bottom:1px solid var(--bdr);padding:10px 14px;display:flex;align-items:center;gap:8px}
+.tb-ico{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--bg2);border:1px solid var(--bdr);cursor:pointer;font-size:16px;color:var(--ink3);transition:all 0.15s;flex-shrink:0}
+.tb-ico:active{background:var(--bg3);transform:scale(0.92)}
+.tb-title{flex:1;text-align:center;font-family:var(--ar);font-size:20px;font-weight:700;color:var(--ink)}
+.tb-spacer{width:80px}
 
-/* ============ SCROLL CONTAINER ============ */
-.scroller{flex:1;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch}
-.scroller::-webkit-scrollbar{width:2px}
-.scroller::-webkit-scrollbar-thumb{background:var(--bdr);border-radius:2px}
+/* ── SCROLLER ── */
+.scroller{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch}
+.scroller::-webkit-scrollbar{width:0}
 
-/* ============ HOME ============ */
-.hero{
-  position:relative;overflow:hidden;
-  background:linear-gradient(160deg,var(--em) 0%,var(--em2) 45%,var(--tl) 100%);
-  padding:28px 20px 36px;text-align:center;
-}
-.hero-deco{
-  position:absolute;inset:0;pointer-events:none;
-  background:
-    radial-gradient(ellipse 60% 50% at 15% 40%, rgba(255,255,255,0.06) 0%, transparent 70%),
-    radial-gradient(ellipse 40% 60% at 85% 20%, rgba(240,192,80,0.10) 0%, transparent 65%),
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Cpolygon points='50,5 95,27.5 95,72.5 50,95 5,72.5 5,27.5' fill='none' stroke='rgba(255,255,255,0.035)' stroke-width='1'/%3E%3Cpolygon points='50,18 82,34 82,66 50,82 18,66 18,34' fill='none' stroke='rgba(255,255,255,0.025)' stroke-width='1'/%3E%3C/svg%3E") center/100px;
-}
-.hero-ornament{
-  font-size:11px;letter-spacing:4px;color:rgba(255,255,255,0.5);
-  text-transform:uppercase;margin-bottom:10px;position:relative;z-index:1;
-}
-.hero-bism{
-  font-family:var(--ar);font-size:28px;font-weight:600;
-  color:#fff;direction:rtl;line-height:1.9;
-  text-shadow:0 2px 16px rgba(0,0,0,0.22);
-  margin-bottom:6px;position:relative;z-index:1;
-}
-.hero-bism-en{
-  font-size:12px;color:rgba(255,255,255,0.62);
-  margin-bottom:16px;position:relative;z-index:1;font-style:italic;
-}
-.hero-date{
-  display:inline-flex;align-items:center;gap:7px;
-  background:rgba(255,255,255,0.11);border:1px solid rgba(255,255,255,0.18);
-  border-radius:24px;padding:5px 16px;
-  font-size:11.5px;color:rgba(255,255,255,0.82);
-  position:relative;z-index:1;
-}
+/* ── HOME PRAYER STRIP ── */
+.prayer-strip-wrap{position:relative;overflow:hidden;background:linear-gradient(180deg,#a8e0e8 0%,#c8f0f4 35%,#e8f8f8 60%,var(--bg2) 100%);padding:14px 14px 0}
+.dark .prayer-strip-wrap{background:linear-gradient(180deg,#0a2030 0%,#0e2838 35%,#122030 60%,var(--bg2) 100%)}
+.ps-city{text-align:center;font-size:18px;font-weight:900;color:var(--ink);margin-bottom:12px}
+.ps-row{display:flex;align-items:flex-end;justify-content:center;gap:6px;margin-bottom:0}
+.ps-pill{flex:1;background:rgba(255,255,255,0.55);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,0.7);border-radius:12px 12px 0 0;padding:10px 5px 12px;text-align:center;transition:all 0.18s}
+.dark .ps-pill{background:rgba(255,255,255,0.08);border-color:rgba(255,255,255,0.12)}
+.ps-pill.active{background:white;border-color:white;box-shadow:0 -2px 16px rgba(0,0,0,0.1);padding-top:14px}
+.dark .ps-pill.active{background:rgba(255,255,255,0.15)}
+.ps-pname{font-size:11px;font-weight:700;color:var(--ink3);margin-bottom:3px}
+.ps-pill.active .ps-pname{color:var(--ink2)}
+.ps-ptime{font-size:14px;font-weight:900;color:var(--ink);font-family:var(--en);direction:ltr}
+.ps-center{flex:1.2;background:white;border:1.5px solid var(--bdr);border-radius:14px 14px 0 0;padding:10px 6px 12px;text-align:center;box-shadow:0 -3px 18px rgba(0,0,0,0.1);padding-top:12px}
+.dark .ps-center{background:var(--card2)}
+.ps-hijri-day{font-family:var(--ar);font-size:22px;font-weight:700;color:var(--gold);line-height:1.2}
+.ps-hijri-month{font-family:var(--ar);font-size:12px;color:var(--gold2);font-weight:600}
+.ps-cd-bar{background:var(--card);border-bottom:1px solid var(--bdr);padding:7px 16px;display:flex;align-items:center;justify-content:flex-end;gap:8px;flex-shrink:0}
+.ps-cd-lbl{font-size:13px;font-weight:700;color:var(--blue)}
+.ps-cd-time{font-size:15px;font-weight:900;color:var(--blue);font-family:var(--en);direction:ltr}
 
-.cards-grid{display:grid;grid-template-columns:1fr 1fr;gap:11px;padding:16px 14px 6px}
-.hcard{
-  background:var(--card);border:1.5px solid var(--bdr);
-  border-radius:18px;padding:17px 12px 14px;
-  display:flex;flex-direction:column;align-items:center;gap:9px;
-  cursor:pointer;transition:all 0.22s;
-  box-shadow:0 2px 14px var(--shd);
-  position:relative;overflow:hidden;
-}
-.hcard::after{content:'';position:absolute;top:0;left:0;right:0;height:2.5px;background:linear-gradient(90deg,var(--em2),var(--tl));transform:scaleX(0);transform-origin:left;transition:transform 0.25s}
-.hcard:active{transform:scale(0.96);border-color:var(--em2)}
-.hcard:active::after{transform:scaleX(1)}
-.hcard-ico{
-  width:50px;height:50px;border-radius:14px;
-  display:flex;align-items:center;justify-content:center;font-size:25px;
-}
-.hcard-ico.g{background:linear-gradient(135deg,var(--em5),var(--em4))}
-.hcard-ico.y{background:linear-gradient(135deg,var(--gd4),rgba(240,192,80,0.18))}
-.hcard-lbl{font-size:12.5px;font-weight:700;color:var(--ink2);text-align:center;font-family:var(--ui)}
+/* ── HOME MENU ── */
+.home-menu{padding:12px 10px 80px}
+.menu-row{display:flex;gap:8px;margin-bottom:8px}
+.mcard{flex:1;background:var(--card);border:1.5px solid var(--bdr);border-radius:18px;padding:14px 12px 12px;display:flex;flex-direction:column;align-items:flex-end;cursor:pointer;transition:all 0.2s;box-shadow:0 1px 8px var(--shd);min-height:78px;position:relative;overflow:hidden;gap:4px}
+.mcard:active{transform:scale(0.96)}
+.mcard.wide{flex:2}
+.mcard-num{position:absolute;left:8px;bottom:8px;font-size:18px;font-weight:900;color:rgba(0,0,0,0.06);font-family:var(--en);line-height:1}
+.dark .mcard-num{color:rgba(255,255,255,0.06)}
+.mcard-ico{font-size:21px}
+.mcard-title{font-family:var(--ar);font-size:15px;font-weight:700;color:var(--gold);text-align:right;line-height:1.2}
+.mcard-sub{font-size:11px;color:var(--ink4);text-align:right;font-family:var(--ui)}
 
-.sec-hd{display:flex;align-items:center;justify-content:space-between;padding:14px 16px 7px}
-.sec-title{font-family:var(--ui);font-size:15px;font-weight:700;color:var(--em);display:flex;align-items:center;gap:6px}
-.sec-title::before{content:'';width:3px;height:15px;background:linear-gradient(180deg,var(--em2),var(--tl));border-radius:2px}
-.sec-link{font-size:12px;color:var(--gd);cursor:pointer;font-weight:700}
+/* ── SURAH LIST ── */
+.list-topbar{flex-shrink:0;background:var(--card);border-bottom:1px solid var(--bdr);padding:8px 12px;display:flex;align-items:center;gap:8px}
+.ltabs{display:flex;gap:6px;flex:1}
+.ltab{padding:7px 12px;border-radius:22px;font-size:13px;font-weight:700;color:var(--ink3);cursor:pointer;transition:all 0.18s;white-space:nowrap}
+.ltab.on{background:var(--bg3);color:var(--ink)}
+.lsearch{display:flex;align-items:center;gap:6px;background:var(--bg2);border:1.5px solid var(--bdr);border-radius:22px;padding:6px 12px;flex:1;max-width:130px;transition:border-color 0.18s}
+.lsearch:focus-within{border-color:var(--gold2)}
+.lsearch input{flex:1;border:none;background:transparent;font-family:var(--ui);font-size:13px;color:var(--ink);outline:none;direction:rtl;min-width:0}
+.lsearch input::placeholder{color:var(--ink4)}
+.surah-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:10px 8px 80px}
+.sgcard{background:var(--card);border:1.5px solid var(--bdr);border-radius:18px;padding:14px 12px 10px;cursor:pointer;transition:all 0.2s;box-shadow:0 1px 8px var(--shd);position:relative;overflow:hidden;text-align:right;min-height:108px;display:flex;flex-direction:column}
+.sgcard:active{transform:scale(0.96);border-color:var(--gold)}
+.sgcard-num{position:absolute;left:8px;top:50%;transform:translateY(-50%);font-size:20px;font-weight:900;color:rgba(0,0,0,0.07);font-family:var(--en)}
+.dark .sgcard-num{color:rgba(255,255,255,0.08)}
+.sgcard-ar{font-family:var(--ar);font-size:22px;font-weight:700;color:var(--ink);line-height:1.5;direction:rtl}
+.sgcard-meta{font-size:12px;color:var(--gold);font-weight:700;margin-top:5px}
+.sgcard-page{font-size:11px;color:var(--ink4);margin-top:2px}
+.juz-list{padding:8px 8px 80px}
+.juz-card{display:flex;align-items:center;background:var(--card);border:1.5px solid var(--bdr);border-radius:16px;padding:13px 14px;margin-bottom:8px;cursor:pointer;transition:all 0.18s;gap:12px;box-shadow:0 1px 6px var(--shd)}
+.juz-card:active{border-color:var(--gold);transform:scale(0.98)}
+.juz-ball{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold2));display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:900;color:#fff;flex-shrink:0;font-family:var(--en);box-shadow:0 2px 8px rgba(160,120,48,0.35)}
+.juz-info{flex:1;text-align:right}
+.juz-title{font-size:16px;font-weight:700;color:var(--ink)}
+.juz-sub{font-family:var(--ar);font-size:15px;color:var(--ink3);margin-top:2px}
+.juz-arr{font-size:18px;color:var(--ink4)}
 
-.srow{display:flex;align-items:center;padding:12px 16px;border-bottom:1px solid rgba(184,131,26,0.1);cursor:pointer;transition:background 0.15s;gap:12px}
-.srow:active{background:var(--em5)}
-.snum{
-  width:38px;height:38px;border-radius:10px;
-  background:linear-gradient(135deg,var(--em),var(--tl));
-  display:flex;align-items:center;justify-content:center;
-  font-size:12px;font-weight:700;color:#fff;flex-shrink:0;
-  box-shadow:0 2px 8px rgba(11,94,69,0.28);font-family:var(--en);
-}
-.sinfo{flex:1;min-width:0}
-.sen{font-size:14px;font-weight:700;color:var(--ink);font-family:var(--ui)}
-.smeta{font-size:11px;color:var(--ink4);margin-top:1.5px;font-family:var(--en)}
-.sar{font-family:var(--ar);font-size:20px;color:var(--em);font-weight:600;flex-shrink:0}
-
-/* ============ SURAH LIST TAB ============ */
-.search-wrap{padding:10px 14px 4px}
-.search-box{
-  display:flex;align-items:center;gap:10px;
-  background:var(--card);border:1.5px solid var(--bdr);
-  border-radius:14px;padding:10px 14px;
-  box-shadow:0 1px 8px var(--shd);
-  transition:border-color 0.2s;
-}
-.search-box:focus-within{border-color:var(--em2)}
-.search-box input{flex:1;border:none;background:transparent;font-family:var(--ui);font-size:15px;color:var(--ink);outline:none}
-.search-box input::placeholder{color:var(--ink4)}
-
-/* ============ READER ============ */
+/* ── READER ── */
 .reader-wrap{flex:1;display:flex;flex-direction:column;overflow:hidden;min-height:0}
-
-.rnav{
-  flex-shrink:0;background:var(--bg2);
-  border-bottom:1px solid var(--bdr);
-  display:flex;align-items:center;padding:6px 10px;gap:6px;
-  overflow-x:auto;
-}
+.rnav{flex-shrink:0;background:var(--card2);border-bottom:1px solid var(--bdr);display:flex;align-items:center;padding:6px 10px;gap:5px;overflow-x:auto}
 .rnav::-webkit-scrollbar{height:0}
-.rchip{
-  flex-shrink:0;padding:5px 13px;border-radius:20px;
-  font-size:11.5px;font-weight:700;font-family:var(--ui);
-  background:var(--card);border:1.5px solid var(--bdr);
-  color:var(--ink2);cursor:pointer;white-space:nowrap;transition:all 0.18s;
-}
-.rchip.active{background:var(--em);color:#fff;border-color:transparent;box-shadow:0 2px 10px rgba(11,94,69,0.35)}
-.rchip.gold{background:linear-gradient(135deg,var(--gd),var(--gd2));color:#fff;border-color:transparent}
+.rchip{flex-shrink:0;padding:5px 12px;border-radius:22px;font-size:11.5px;font-weight:700;font-family:var(--ui);background:var(--bg2);border:1.5px solid var(--bdr);color:var(--ink2);cursor:pointer;white-space:nowrap;transition:all 0.18s}
+.rchip.green{background:var(--green);color:#fff;border-color:transparent}
+.rchip.gold{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#fff;border-color:transparent}
 .rchip:active{transform:scale(0.95)}
-.rsep{width:1px;height:16px;background:var(--bdr);flex-shrink:0}
-
-.rtool{
-  flex-shrink:0;background:var(--card);
-  border-bottom:1px solid var(--bdr);
-  display:flex;align-items:center;padding:6px 12px;gap:6px;
-}
-.rtbtn{
-  width:34px;height:34px;border-radius:9px;
-  display:flex;align-items:center;justify-content:center;
-  background:var(--bg2);border:1.5px solid var(--bdr);
-  cursor:pointer;font-size:15px;transition:all 0.18s;flex-shrink:0;
-}
-.rtbtn.on{background:linear-gradient(135deg,var(--em),var(--tl));color:#fff;border-color:transparent}
-.rtbtn:active{transform:scale(0.91)}
-.fcg{display:flex;align-items:center;gap:5px;margin-left:auto}
-.fcbtn{
-  width:30px;height:30px;border-radius:8px;
-  border:1.5px solid var(--bdr);background:var(--bg2);
-  cursor:pointer;display:flex;align-items:center;justify-content:center;
-  font-size:14px;font-weight:800;color:var(--ink2);transition:all 0.18s;font-family:var(--en);
-}
-.fcbtn:active{background:var(--em);color:#fff;border-color:transparent}
+.rsep{width:1px;height:14px;background:var(--bdr);flex-shrink:0}
+.rtool{flex-shrink:0;background:var(--card);border-bottom:1px solid var(--bdr);display:flex;align-items:center;padding:5px 10px;gap:5px}
+.rtbtn{width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;background:var(--bg2);border:1.5px solid var(--bdr);cursor:pointer;font-size:14px;transition:all 0.18s;flex-shrink:0}
+.rtbtn.on{background:var(--green);color:#fff;border-color:transparent}
+.rtbtn:active{transform:scale(0.9)}
+.fcg{display:flex;align-items:center;gap:4px;margin-right:auto}
+.fcbtn{width:29px;height:29px;border-radius:8px;border:1.5px solid var(--bdr);background:var(--bg2);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;color:var(--ink2);font-family:var(--en)}
+.fcbtn:active{background:var(--green);color:#fff;border-color:transparent}
 .fcval{font-size:11px;color:var(--ink3);min-width:22px;text-align:center;font-weight:700;font-family:var(--en)}
 
-/* Mushaf page */
-.mpage{flex:1;overflow-y:auto;background:var(--bg);-webkit-overflow-scrolling:touch}
+/* Sheikh selector strip */
+.sheikh-strip{flex-shrink:0;background:var(--card2);border-bottom:1px solid var(--bdr);padding:6px 10px;display:flex;align-items:center;gap:5px;overflow-x:auto}
+.sheikh-strip::-webkit-scrollbar{height:0}
+.sheikh-btn{flex-shrink:0;padding:5px 12px;border-radius:20px;font-size:11px;font-weight:700;background:var(--bg2);border:1.5px solid var(--bdr);color:var(--ink3);cursor:pointer;white-space:nowrap;transition:all 0.18s;font-family:var(--ui)}
+.sheikh-btn.on{background:var(--gold);color:#fff;border-color:transparent;box-shadow:0 1px 8px rgba(160,120,48,0.35)}
+
+.mpage{flex:1;overflow-y:auto;background:var(--bg)}
 .mpage::-webkit-scrollbar{width:2px}
 .mpage::-webkit-scrollbar-thumb{background:var(--bdr)}
+.mhdr{background:var(--card);border-bottom:1.5px solid var(--bdr2);padding:20px 16px 18px;text-align:center;position:relative;overflow:hidden}
+.mhdr-glow{position:absolute;inset:0;background:radial-gradient(ellipse 80% 50% at 50% 0%,rgba(160,120,48,0.07) 0%,transparent 70%);pointer-events:none}
+.mhdr-ar{font-family:var(--ar);font-size:44px;font-weight:700;color:var(--ink);direction:rtl;line-height:1.3;position:relative;z-index:1}
+.mhdr-en{font-family:var(--en);font-size:11px;color:var(--ink4);letter-spacing:2.5px;text-transform:uppercase;margin-top:4px;position:relative;z-index:1}
+.mhdr-pills{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:10px;flex-wrap:wrap;position:relative;z-index:1}
+.mpill{background:var(--bg2);border:1px solid var(--bdr);border-radius:22px;padding:3px 12px;font-size:11px;color:var(--ink3);font-family:var(--ui);font-weight:600}
+.mpill.gold{background:var(--goldbg);border-color:var(--bdr2);color:var(--gold);font-weight:700}
+.bism-blk{margin:14px 12px 4px;padding:13px 16px;background:var(--goldbg);border:1px solid var(--bdr2);border-radius:18px;text-align:center;position:relative}
+.bism-blk::before,.bism-blk::after{content:'';position:absolute;left:12%;right:12%;height:1px;background:linear-gradient(90deg,transparent,var(--gold2),transparent)}
+.bism-blk::before{top:0}.bism-blk::after{bottom:0}
+.bism-ar{font-family:var(--ar);font-size:26px;font-weight:600;color:var(--ink2);direction:rtl;line-height:1.9}
+.ayah-body{padding:8px 14px 20px;direction:rtl;font-family:var(--ar);color:var(--ink);line-height:2.5;text-align:justify}
+.aspan{display:inline;cursor:pointer;border-radius:5px;padding:1px 2px;transition:background 0.15s}
+.aspan.sel{background:rgba(160,120,48,0.18);border-radius:6px;padding:2px 5px}
+.aspan.play{background:rgba(26,112,72,0.13);border-radius:6px;padding:2px 5px}
+.anum{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;margin:0 3px;vertical-align:middle;flex-shrink:0;cursor:pointer;font-size:11px;font-weight:700;color:#fff;font-family:var(--en);background:linear-gradient(135deg,var(--gold),var(--gold2));box-shadow:0 1px 6px rgba(160,120,48,0.4);transition:transform 0.15s}
+.anum:active{transform:scale(0.85)}
+.anum.playing{background:linear-gradient(135deg,var(--green),var(--green2));box-shadow:0 1px 14px rgba(26,112,72,0.55);animation:beat 1.4s ease-in-out infinite}
+@keyframes beat{0%,100%{box-shadow:0 1px 8px rgba(26,112,72,0.4)}50%{box-shadow:0 2px 20px rgba(26,112,72,0.7)}}
+.next-banner{margin:6px 12px 18px;padding:13px 14px;background:var(--card);border:1.5px solid var(--bdr);border-radius:18px;display:flex;align-items:center;gap:10px;cursor:pointer;transition:all 0.2s;box-shadow:0 1px 8px var(--shd)}
+.next-banner:active{border-color:var(--gold);transform:scale(0.98)}
+.nb-ico{font-size:26px;flex-shrink:0}
+.nb-info{flex:1;text-align:right}
+.nb-lbl{font-size:10px;color:var(--green);font-weight:700;letter-spacing:1px;text-transform:uppercase;font-family:var(--en)}
+.nb-ar{font-family:var(--ar);font-size:21px;color:var(--ink);font-weight:700}
+.nb-en{font-size:11px;color:var(--ink4);font-family:var(--ui)}
+.nb-arr{font-size:20px;color:var(--ink4)}
 
-.mhdr{
-  position:relative;overflow:hidden;
-  background:linear-gradient(140deg,var(--em) 0%,var(--em2) 50%,var(--tl) 100%);
-  padding:22px 20px 28px;text-align:center;
-}
-.mhdr-wave{position:absolute;bottom:0;left:0;right:0;height:22px;background:var(--bg);border-radius:22px 22px 0 0}
-.mhdr-ar{font-family:var(--ar);font-size:42px;font-weight:700;color:#fff;direction:rtl;line-height:1.3;text-shadow:0 2px 18px rgba(0,0,0,0.28)}
-.mhdr-en{font-family:var(--en);font-size:12px;color:rgba(255,255,255,0.75);letter-spacing:2.5px;text-transform:uppercase;margin-top:5px}
-.mhdr-pills{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:10px}
-.mpill{
-  background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.22);
-  border-radius:20px;padding:3px 12px;font-size:11px;color:rgba(255,255,255,0.82);
-  font-family:var(--en);
-}
-.mpill.gold{background:rgba(240,192,80,0.22);border-color:rgba(240,192,80,0.35);color:rgba(255,220,100,0.95)}
-
-.bism-wrap{
-  margin:14px 14px 6px;padding:14px 16px;
-  background:linear-gradient(135deg,var(--gd4),rgba(240,192,80,0.07));
-  border:1px solid var(--bdr2);border-radius:16px;
-  text-align:center;position:relative;
-}
-.bism-wrap::before{content:'';position:absolute;top:0;left:10%;right:10%;height:1.5px;background:linear-gradient(90deg,transparent,var(--gd2),transparent)}
-.bism-wrap::after{content:'';position:absolute;bottom:0;left:10%;right:10%;height:1.5px;background:linear-gradient(90deg,transparent,var(--gd2),transparent)}
-.bism-ar{font-family:var(--ar);font-size:27px;font-weight:600;color:var(--ink2);direction:rtl;line-height:1.9}
-
-/* Ayahs */
-.ayah-body{
-  padding:10px 16px 24px;direction:rtl;
-  font-family:var(--ar);color:var(--ink);
-  line-height:2.5;text-align:justify;
-}
-.aspan{display:inline;cursor:pointer;border-radius:5px;padding:1px 2px;transition:background 0.18s}
-.aspan.sel{background:rgba(184,131,26,0.18);border-radius:6px;padding:2px 5px}
-.aspan.play{background:rgba(11,94,69,0.13);border-radius:6px;padding:2px 5px}
-.anum{
-  display:inline-flex;align-items:center;justify-content:center;
-  width:30px;height:30px;border-radius:50%;
-  margin:0 4px;vertical-align:middle;
-  cursor:pointer;flex-shrink:0;
-  font-size:11px;font-weight:700;color:#fff;font-family:var(--en);
-  background:linear-gradient(135deg,var(--gd),var(--gd2));
-  box-shadow:0 2px 8px rgba(184,131,26,0.35);
-  transition:transform 0.18s,box-shadow 0.18s;
-}
-.anum:active{transform:scale(0.86)}
-.anum.playing{
-  background:linear-gradient(135deg,var(--em),var(--tl));
-  box-shadow:0 2px 14px rgba(11,94,69,0.55);
-  animation:beat 1.4s ease-in-out infinite;
-}
-@keyframes beat{0%,100%{box-shadow:0 2px 8px rgba(11,94,69,0.45)}50%{box-shadow:0 3px 22px rgba(11,94,69,0.75)}}
-
-/* Next surah banner */
-.next-surah-banner{
-  margin:8px 14px 16px;
-  background:linear-gradient(135deg,var(--em5),var(--em4));
-  border:1.5px solid var(--em3);
-  border-radius:16px;padding:14px 16px;
-  display:flex;align-items:center;gap:12px;
-  cursor:pointer;transition:all 0.22s;
-}
-.next-surah-banner:active{transform:scale(0.97)}
-.nsb-ico{font-size:28px;flex-shrink:0}
-.nsb-info{flex:1}
-.nsb-label{font-size:11px;color:var(--em2);font-weight:700;letter-spacing:1px;text-transform:uppercase;font-family:var(--en)}
-.nsb-name-ar{font-family:var(--ar);font-size:22px;color:var(--ink);font-weight:600}
-.nsb-name-en{font-size:12px;color:var(--ink3);font-family:var(--ui)}
-.nsb-arrow{font-size:22px;color:var(--em2);flex-shrink:0}
-
-/* Translation panel */
-.trans-panel{
-  flex-shrink:0;overflow:hidden;
-  max-height:0;transition:max-height 0.38s cubic-bezier(0.4,0,0.2,1);
-  background:var(--bg2);border-top:2px solid var(--em);
-}
-.trans-panel.open{max-height:42vh}
-.trans-inner{overflow-y:auto;max-height:42vh}
+/* Translation */
+.trans-panel{flex-shrink:0;overflow:hidden;max-height:0;transition:max-height 0.38s cubic-bezier(.4,0,.2,1);background:var(--bg2);border-top:2px solid var(--green)}
+.trans-panel.open{max-height:40vh}
+.trans-inner{overflow-y:auto;max-height:40vh}
 .trans-inner::-webkit-scrollbar{width:2px}
 .trans-inner::-webkit-scrollbar-thumb{background:var(--bdr)}
-.trans-hd{
-  position:sticky;top:0;z-index:2;
-  display:flex;align-items:center;justify-content:space-between;
-  padding:8px 14px;
-  background:rgba(240,250,246,0.96);
-  backdrop-filter:blur(6px);
-  border-bottom:1px solid rgba(11,94,69,0.12);
-}
-.dark .trans-hd{background:rgba(10,42,32,0.96)}
-.trans-hd-lbl{font-size:11px;font-weight:700;color:var(--em2);letter-spacing:1.5px;text-transform:uppercase;font-family:var(--en)}
-.trans-x{width:26px;height:26px;border-radius:7px;background:rgba(11,94,69,0.1);display:flex;align-items:center;justify-content:center;font-size:13px;cursor:pointer;color:var(--ink3)}
-.tv{padding:11px 14px;border-bottom:1px solid rgba(184,131,26,0.1)}
-.tv-n{display:inline-block;background:linear-gradient(135deg,var(--gd),var(--gd2));color:#fff;font-size:9.5px;font-weight:700;padding:2px 9px;border-radius:10px;margin-bottom:5px;font-family:var(--en)}
-.tv-ar{font-family:var(--ar);font-size:17px;color:var(--ink2);direction:rtl;text-align:right;line-height:1.9;margin-bottom:6px;font-weight:500}
-.tv-en{font-size:13px;color:var(--ink3);line-height:1.78;border-left:2.5px solid rgba(11,94,69,0.22);padding-left:10px;font-family:var(--en)}
+.trans-hd{position:sticky;top:0;z-index:2;display:flex;align-items:center;justify-content:space-between;padding:7px 12px;background:rgba(242,237,228,0.97);backdrop-filter:blur(5px);border-bottom:1px solid var(--bdr)}
+.dark .trans-hd{background:rgba(17,16,8,0.97)}
+.trans-lbl{font-size:11px;font-weight:700;color:var(--green);letter-spacing:1.5px;text-transform:uppercase;font-family:var(--en)}
+.trans-x{width:24px;height:24px;border-radius:6px;background:rgba(0,0,0,0.06);display:flex;align-items:center;justify-content:center;font-size:13px;cursor:pointer;color:var(--ink3)}
+.tv{padding:10px 12px;border-bottom:1px solid rgba(160,120,48,0.1)}
+.tv-n{display:inline-block;background:linear-gradient(135deg,var(--gold),var(--gold2));color:#fff;font-size:9px;font-weight:700;padding:2px 8px;border-radius:10px;margin-bottom:4px;font-family:var(--en)}
+.tv-ar{font-family:var(--ar);font-size:16px;color:var(--ink2);direction:rtl;text-align:right;line-height:1.9;margin-bottom:5px}
+.tv-en{font-size:13px;color:var(--ink3);line-height:1.75;border-right:2.5px solid rgba(26,112,72,0.22);padding-right:9px;text-align:right;font-family:var(--en)}
 
 /* Audio bar */
-.abar{
-  flex-shrink:0;
-  background:linear-gradient(135deg,var(--em) 0%,var(--em2) 55%,var(--tl) 100%);
-  padding:9px 14px;display:flex;align-items:center;gap:11px;
-  box-shadow:0 -2px 18px var(--shd);
-}
-.aplay{
-  width:42px;height:42px;border-radius:50%;
-  background:rgba(255,255,255,0.18);border:2px solid rgba(255,255,255,0.38);
-  display:flex;align-items:center;justify-content:center;
-  font-size:18px;cursor:pointer;color:#fff;flex-shrink:0;
-  transition:all 0.18s;
-}
-.aplay:active{background:rgba(255,255,255,0.35);transform:scale(0.93)}
+.abar{flex-shrink:0;background:var(--green);padding:9px 14px;display:flex;align-items:center;gap:10px;box-shadow:0 -2px 16px var(--shd)}
+.aplay{width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,0.2);border:2px solid rgba(255,255,255,0.38);display:flex;align-items:center;justify-content:center;font-size:17px;cursor:pointer;color:#fff;flex-shrink:0;transition:all 0.15s}
+.aplay:active{background:rgba(255,255,255,0.35);transform:scale(0.92)}
 .ainfo{flex:1;min-width:0}
-.atitle{font-size:13px;font-weight:700;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-family:var(--ui)}
-.asub{font-size:10px;color:rgba(255,255,255,0.62);margin-top:1px;font-family:var(--en)}
-.aprog{height:3px;background:rgba(255,255,255,0.22);border-radius:3px;margin-top:6px;overflow:hidden}
-.afill{height:100%;background:linear-gradient(90deg,var(--gd3),#fff);border-radius:3px;transition:width 0.3s}
-.astop{font-size:20px;cursor:pointer;color:rgba(255,255,255,0.7);flex-shrink:0;transition:color 0.18s}
-.astop:active{color:#fff}
+.atitle{font-size:13px;font-weight:700;color:#fff;font-family:var(--ui);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.asub{font-size:10px;color:rgba(255,255,255,0.65);font-family:var(--en)}
+.aprog{height:3px;background:rgba(255,255,255,0.25);border-radius:3px;margin-top:5px;overflow:hidden}
+.afill{height:100%;background:#fff;border-radius:3px;transition:width 0.3s}
+.astop{font-size:19px;cursor:pointer;color:rgba(255,255,255,0.72);flex-shrink:0}
 
-/* ============ PRAYER ============ */
-.phero{
-  position:relative;overflow:hidden;
-  background:linear-gradient(160deg,var(--em) 0%,var(--em2) 50%,var(--tl) 100%);
-  padding:24px 20px 30px;text-align:center;
-}
-.phero::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 70% 30%,rgba(240,192,80,0.14) 0%,transparent 60%);pointer-events:none}
-.pcity{font-size:20px;font-weight:800;color:#fff;margin-bottom:3px;font-family:var(--ui);position:relative;z-index:1}
-.pdate{font-size:12px;color:rgba(255,255,255,0.62);font-family:var(--en);position:relative;z-index:1}
-.pnext{
-  margin:14px 14px 6px;
-  background:linear-gradient(135deg,var(--gd4),rgba(240,192,80,0.06));
-  border:1.5px solid var(--bdr2);border-radius:20px;
-  padding:16px;text-align:center;position:relative;overflow:hidden;
-}
-.pnext::before{content:'';position:absolute;top:0;left:15%;right:15%;height:1.5px;background:linear-gradient(90deg,transparent,var(--gd2),transparent)}
-.pnext-lbl{font-size:10px;font-weight:700;color:var(--gd);letter-spacing:2.5px;text-transform:uppercase;font-family:var(--en)}
-.pnext-name{font-size:22px;font-weight:800;color:var(--ink);margin-top:6px;font-family:var(--ui)}
-.pnext-time{
-  font-family:var(--ar);font-size:46px;font-weight:700;
-  background:linear-gradient(135deg,var(--gd),var(--gd2));
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
-  line-height:1.25;
-}
-.plist{padding:4px 14px 14px}
-.prow{
-  display:flex;align-items:center;
-  padding:13px 15px;
-  background:var(--card);border:1.5px solid var(--bdr);
-  border-radius:16px;margin-bottom:9px;
-  box-shadow:0 1px 6px var(--shd);transition:all 0.18s;
-}
-.prow.now{background:linear-gradient(135deg,var(--em5),var(--em4));border-color:var(--em2);box-shadow:0 2px 18px rgba(11,94,69,0.18)}
-.pico{font-size:22px;margin-right:13px}
-.pname{flex:1;font-size:15px;font-weight:700;color:var(--ink2);font-family:var(--ui)}
-.prow.now .pname{color:var(--em)}
-.ptime{font-family:var(--ar);font-size:18px;font-weight:700;color:var(--ink2)}
-.prow.now .ptime{color:var(--em2)}
-.pbadge{
-  margin-left:8px;background:linear-gradient(135deg,var(--em),var(--tl));
-  color:#fff;font-size:9px;font-weight:700;padding:2px 9px;
-  border-radius:10px;letter-spacing:.5px;font-family:var(--en);
-}
+/* ── ATHKAR ── */
+.athkar-home{padding:10px 10px 80px}
+.ath-section-title{font-family:var(--ar);font-size:16px;font-weight:700;color:var(--ink3);padding:10px 4px 6px;letter-spacing:0.3px}
+.ath-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:4px}
+.ath-card{background:var(--card);border:1.5px solid var(--bdr);border-radius:18px;padding:16px 14px 13px;cursor:pointer;transition:all 0.2s;box-shadow:0 1px 8px var(--shd);display:flex;flex-direction:column;align-items:flex-end;gap:6px;min-height:88px;position:relative;overflow:hidden}
+.ath-card:active{transform:scale(0.96)}
+.ath-card-ico{font-size:26px}
+.ath-card-title{font-family:var(--ar);font-size:16px;font-weight:700;text-align:right;line-height:1.3}
+.ath-card-count{font-size:11px;color:var(--ink4);font-family:var(--ui);text-align:right}
+.ath-card-bar{position:absolute;bottom:0;left:0;right:0;height:3px;border-radius:0 0 16px 16px}
 
-/* ============ BOOKMARKS ============ */
-.bmhero{background:linear-gradient(135deg,var(--em),var(--tl));padding:20px;text-align:center}
-.bmhero-title{font-family:var(--ui);font-size:18px;font-weight:700;color:#fff}
-.bmhero-sub{font-size:12px;color:rgba(255,255,255,0.62);margin-top:3px;font-family:var(--en)}
-.bmrow{display:flex;align-items:center;padding:13px 16px;border-bottom:1px solid rgba(184,131,26,0.1);cursor:pointer;gap:12px;transition:background 0.15s}
-.bmrow:active{background:var(--em5)}
-.bmico{width:38px;height:38px;border-radius:10px;background:linear-gradient(135deg,var(--gd4),rgba(240,192,80,0.15));display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;border:1px solid var(--bdr2)}
-.bmi{flex:1;min-width:0}
-.bmtitle{font-size:14px;font-weight:700;color:var(--ink);font-family:var(--ui)}
-.bmsub{font-size:11px;color:var(--ink4);margin-top:1.5px;font-family:var(--en)}
-.bmar{font-family:var(--ar);font-size:17px;color:var(--em);font-weight:600;flex-shrink:0}
+/* Athkar colors */
+.ath-morning .ath-card-title{color:#d4820a}.ath-morning .ath-card-bar{background:linear-gradient(90deg,#f0a830,#f8c860)}
+.ath-morning{border-color:rgba(212,130,10,0.3)}
+.ath-evening .ath-card-title{color:#1a5fa0}.ath-evening .ath-card-bar{background:linear-gradient(90deg,#2060c0,#5090f0)}
+.ath-evening{border-color:rgba(26,95,160,0.3)}
+.ath-sleep .ath-card-title{color:#5040a0}.ath-sleep .ath-card-bar{background:linear-gradient(90deg,#6040a0,#9070d0)}
+.ath-sleep{border-color:rgba(80,64,160,0.3)}
+.ath-prayer .ath-card-title{color:#1a7048}.ath-prayer .ath-card-bar{background:linear-gradient(90deg,#1a7048,#30b070)}
+.ath-prayer{border-color:rgba(26,112,72,0.3)}
+.ath-quran .ath-card-title{color:#a07830}.ath-quran .ath-card-bar{background:linear-gradient(90deg,#a07830,#d0a040)}
+.ath-quran{border-color:rgba(160,120,48,0.3)}
 
-/* ============ BOTTOM NAV ============ */
-.bnav{
-  flex-shrink:0;background:var(--card);
-  border-top:1.5px solid var(--bdr);display:flex;
-  box-shadow:0 -3px 18px var(--shd);
-  padding-bottom:env(safe-area-inset-bottom,0);
-}
-.bnitem{flex:1;display:flex;flex-direction:column;align-items:center;padding:9px 4px 12px;cursor:pointer;gap:4px;position:relative}
-.bnitem::before{content:'';position:absolute;top:0;left:25%;right:25%;height:2.5px;background:linear-gradient(90deg,var(--em2),var(--tl));border-radius:0 0 3px 3px;transform:scaleX(0);transition:transform 0.22s}
-.bnitem.on::before{transform:scaleX(1)}
-.bnico{font-size:22px;filter:grayscale(0.7) opacity(0.5);transition:filter 0.2s,transform 0.2s}
-.bnlbl{font-size:10px;color:var(--ink4);font-weight:600;transition:color 0.2s;font-family:var(--ui)}
-.bnitem.on .bnico{filter:none;transform:scale(1.12)}
-.bnitem.on .bnlbl{color:var(--em);font-weight:700}
-
-/* ============ DRAWER ============ */
-.overlay{position:absolute;inset:0;background:rgba(0,0,0,0.52);z-index:200;backdrop-filter:blur(3px)}
-.drawer{
-  position:absolute;right:0;top:0;bottom:0;
-  width:86%;max-width:355px;
-  background:var(--bg);z-index:201;
-  transform:translateX(102%);
-  transition:transform 0.34s cubic-bezier(0.4,0,0.2,1);
-  display:flex;flex-direction:column;
-  box-shadow:-6px 0 36px rgba(0,0,0,0.28);
-  border-left:1px solid var(--bdr);
-}
-.drawer.open{transform:translateX(0)}
-.dhead{
-  background:linear-gradient(135deg,var(--em) 0%,var(--em2) 55%,var(--tl) 100%);
-  padding:16px 15px 18px;display:flex;align-items:flex-start;justify-content:space-between;
-  flex-shrink:0;position:relative;overflow:hidden;
-}
-.dhead::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 80% 40%,rgba(240,192,80,0.14) 0%,transparent 60%);pointer-events:none}
-.dhead-text{position:relative;z-index:1}
-.dh-ar{font-family:var(--ar);font-size:26px;font-weight:700;color:#fff}
-.dh-en{font-family:var(--en);font-size:9.5px;color:rgba(255,255,255,0.62);letter-spacing:2.5px;text-transform:uppercase;margin-top:2px}
-.dclose{
-  width:34px;height:34px;border-radius:10px;
-  background:rgba(255,255,255,0.14);border:1px solid rgba(255,255,255,0.2);
+/* Athkar reader */
+.ath-reader{flex:1;display:flex;flex-direction:column;overflow:hidden;min-height:0}
+.ath-reader-scroll{flex:1;overflow-y:auto;padding:10px 10px 20px}
+.ath-reader-scroll::-webkit-scrollbar{width:2px}
+.ath-reader-scroll::-webkit-scrollbar-thumb{background:var(--bdr)}
+.zikr-card{background:var(--card);border:1.5px solid var(--bdr);border-radius:20px;padding:18px 16px;margin-bottom:12px;box-shadow:0 1px 10px var(--shd);position:relative;overflow:hidden}
+.zikr-card-bar{position:absolute;top:0;right:0;bottom:0;width:3px;border-radius:0 20px 20px 0}
+.zikr-num{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;background:var(--bg2);border:1px solid var(--bdr);font-size:12px;font-weight:700;color:var(--ink3);font-family:var(--en);margin-bottom:10px}
+.zikr-ar{font-family:var(--ar);font-size:22px;font-weight:600;color:var(--ink);direction:rtl;text-align:right;line-height:1.9;margin-bottom:10px}
+.zikr-tr{font-family:var(--ui);font-size:13px;color:var(--ink3);direction:rtl;text-align:right;line-height:1.75;margin-bottom:10px}
+.zikr-source{font-size:11px;color:var(--ink4);direction:rtl;text-align:right;font-family:var(--ui);margin-bottom:10px;font-style:italic}
+.zikr-footer{display:flex;align-items:center;justify-content:space-between}
+.zikr-count-row{display:flex;align-items:center;gap:8px}
+.zikr-rep{background:var(--goldbg);border:1px solid var(--bdr2);border-radius:22px;padding:4px 14px;font-size:12px;font-weight:700;color:var(--gold);font-family:var(--ui)}
+.zikr-counter{
+  width:44px;height:44px;border-radius:50%;
   display:flex;align-items:center;justify-content:center;
-  font-size:16px;color:#fff;cursor:pointer;flex-shrink:0;
-  position:relative;z-index:1;transition:all 0.18s;
+  font-size:14px;font-weight:900;cursor:pointer;
+  color:#fff;font-family:var(--en);
+  transition:transform 0.15s;flex-shrink:0;
 }
-.dclose:active{background:rgba(255,255,255,0.3)}
+.zikr-counter:active{transform:scale(0.88)}
+.zikr-counter-val{font-size:14px;font-weight:900;color:var(--ink2);font-family:var(--en);min-width:24px;text-align:center}
+.zikr-done{background:var(--greenbg);border:1.5px solid rgba(26,112,72,0.3);border-radius:22px;padding:4px 12px;font-size:12px;font-weight:700;color:var(--green)}
+
+/* ── PRAYER PAGE ── */
+.prayer-wrap{flex:1;overflow-y:auto;padding:10px 10px 80px}
+.prayer-wrap::-webkit-scrollbar{width:0}
+.pcity-row{text-align:center;margin-bottom:10px;font-size:20px;font-weight:900;color:var(--ink)}
+.pdate-row{display:flex;gap:8px;margin-bottom:10px}
+.pdate-card{flex:1;background:var(--card);border:1.5px solid var(--bdr);border-radius:14px;padding:10px 12px;text-align:center;box-shadow:0 1px 6px var(--shd)}
+.pdate-ar{font-family:var(--ar);font-size:17px;font-weight:700;color:var(--ink);direction:rtl}
+.pdate-en{font-size:13px;font-weight:700;color:var(--ink2);font-family:var(--en);direction:ltr}
+.pnext{background:var(--card);border:1.5px solid var(--bdr);border-radius:18px;padding:16px;margin-bottom:10px;text-align:center;box-shadow:0 1px 10px var(--shd)}
+.pnext-lbl{font-size:13px;font-weight:700;color:var(--blue)}
+.pnext-cd{font-size:42px;font-weight:900;color:var(--blue);font-family:var(--en);direction:ltr;line-height:1.2}
+.pgrid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.pcard{background:var(--card);border:1.5px solid var(--bdr);border-radius:16px;padding:14px 12px;text-align:center;box-shadow:0 1px 6px var(--shd)}
+.pcard.now{border-color:var(--blue);background:var(--bluebg)}
+.pcard-name{font-size:14px;font-weight:700;color:var(--ink2);margin-bottom:6px}
+.pcard.now .pcard-name{color:var(--blue)}
+.pcard-time{font-size:26px;font-weight:900;color:var(--ink);font-family:var(--en);direction:ltr;line-height:1}
+.pcard.now .pcard-time{color:var(--blue)}
+.pcard-ampm{font-size:13px;color:var(--ink4);margin-top:3px}
+.pcard.now .pcard-ampm{color:var(--blue)}
+
+/* ── BOOKMARKS ── */
+.bm-wrap{flex:1;overflow-y:auto;padding-bottom:80px}
+.bm-wrap::-webkit-scrollbar{width:0}
+.bmhero{background:var(--card2);padding:16px;border-bottom:1px solid var(--bdr);text-align:right}
+.bmhero-title{font-family:var(--ar);font-size:20px;font-weight:700;color:var(--ink)}
+.bmhero-sub{font-size:12px;color:var(--ink4);margin-top:2px}
+.bmrow{display:flex;align-items:center;padding:12px 14px;border-bottom:1px solid rgba(160,120,48,0.1);cursor:pointer;gap:10px;transition:background 0.15s}
+.bmrow:active{background:var(--goldbg)}
+.bmico{width:36px;height:36px;border-radius:10px;background:var(--goldbg);border:1px solid var(--bdr2);display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0}
+.bmi{flex:1;text-align:right}
+.bmtitle{font-family:var(--ar);font-size:15px;font-weight:700;color:var(--ink)}
+.bmsub{font-size:11px;color:var(--ink4);margin-top:1px}
+
+/* ── BOTTOM NAV ── */
+.bnav{flex-shrink:0;background:var(--card);border-top:1px solid var(--bdr);display:flex;box-shadow:0 -2px 12px var(--shd);padding-bottom:env(safe-area-inset-bottom,0)}
+.bnitem{flex:1;display:flex;flex-direction:column;align-items:center;padding:9px 2px 11px;cursor:pointer;gap:3px;position:relative}
+.bnitem::after{content:'';position:absolute;bottom:0;left:25%;right:25%;height:2.5px;background:linear-gradient(90deg,var(--gold),var(--gold2));border-radius:2px 2px 0 0;transform:scaleX(0);transition:transform 0.2s}
+.bnitem.on::after{transform:scaleX(1)}
+.bnico{font-size:20px;filter:grayscale(0.8) opacity(0.4);transition:filter 0.2s,transform 0.2s}
+.bnlbl{font-size:9.5px;color:var(--ink4);font-weight:700;font-family:var(--ui);transition:color 0.2s;text-align:center}
+.bnitem.on .bnico{filter:none;transform:scale(1.1)}
+.bnitem.on .bnlbl{color:var(--gold)}
+
+/* ── DRAWER ── */
+.overlay{position:absolute;inset:0;background:rgba(0,0,0,0.48);z-index:200;backdrop-filter:blur(2px)}
+.drawer{position:absolute;left:0;top:0;bottom:0;width:84%;max-width:340px;background:var(--bg);z-index:201;transform:translateX(-102%);transition:transform 0.32s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column;box-shadow:5px 0 30px rgba(0,0,0,0.22);border-right:1px solid var(--bdr)}
+.drawer.open{transform:translateX(0)}
+.dhead{background:linear-gradient(135deg,var(--green) 0%,var(--green2) 100%);padding:16px 14px 18px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+.dh-ar{font-family:var(--ar);font-size:24px;font-weight:700;color:#fff}
+.dh-en{font-size:9.5px;color:rgba(255,255,255,0.6);letter-spacing:2.5px;text-transform:uppercase;margin-top:2px;font-family:var(--en)}
+.dclose{width:32px;height:32px;border-radius:9px;background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.2);display:flex;align-items:center;justify-content:center;font-size:16px;color:#fff;cursor:pointer}
 .dbody{flex:1;overflow-y:auto;padding:14px}
 .dbody::-webkit-scrollbar{width:2px}
 .dbody::-webkit-scrollbar-thumb{background:var(--bdr)}
+.dsec{margin-bottom:18px}
+.dsec-t{font-size:10px;font-weight:700;color:var(--ink4);letter-spacing:2.5px;text-transform:uppercase;margin-bottom:9px;padding-bottom:6px;border-bottom:1.5px solid var(--bdr);display:flex;align-items:center;gap:7px;font-family:var(--en)}
+.dsec-t::before{content:'';width:3px;height:12px;background:linear-gradient(180deg,var(--gold),var(--gold2));border-radius:2px}
+.trow{display:flex;align-items:center;justify-content:space-between;padding:9px 0;border-bottom:1px solid rgba(160,120,48,0.1)}
+.trow-lbl{font-size:14px;font-weight:600;color:var(--ink2);display:flex;align-items:center;gap:7px;font-family:var(--ui)}
+.tog{width:44px;height:25px;border-radius:13px;background:var(--bdr);cursor:pointer;position:relative;transition:background 0.22s;flex-shrink:0}
+.tog.on{background:var(--green)}
+.togk{position:absolute;top:2.5px;left:2.5px;width:20px;height:20px;border-radius:50%;background:#fff;transition:transform 0.22s;box-shadow:0 1px 5px rgba(0,0,0,0.22)}
+.tog.on .togk{transform:translateX(19px)}
 
-.dsec{margin-bottom:20px}
-.dsec-title{
-  font-size:10px;font-weight:700;color:var(--ink4);
-  letter-spacing:2.5px;text-transform:uppercase;
-  margin-bottom:10px;padding-bottom:7px;
-  border-bottom:1.5px solid var(--bdr);
-  display:flex;align-items:center;gap:7px;font-family:var(--en);
-}
-.dsec-title::before{content:'';width:3px;height:13px;background:linear-gradient(180deg,var(--em),var(--tl));border-radius:2px}
+/* Sheikh radio buttons in drawer */
+.sheikh-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:4px}
+.sheikh-radio{background:var(--card);border:1.5px solid var(--bdr);border-radius:12px;padding:9px 10px;cursor:pointer;transition:all 0.18s;text-align:right}
+.sheikh-radio.on{background:var(--goldbg);border-color:var(--gold2)}
+.sheikh-radio-name{font-family:var(--ar);font-size:14px;font-weight:700;color:var(--ink2)}
+.sheikh-radio.on .sheikh-radio-name{color:var(--gold)}
+.sheikh-radio-en{font-size:10px;color:var(--ink4);font-family:var(--en);margin-top:1px}
+.sheikh-radio-dot{width:14px;height:14px;border-radius:50%;border:2px solid var(--bdr);display:inline-block;margin-left:6px;vertical-align:middle;transition:all 0.18s;position:relative}
+.sheikh-radio.on .sheikh-radio-dot{border-color:var(--gold2);background:var(--gold2)}
 
-.trow{display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid rgba(184,131,26,0.1)}
-.trow-lbl{font-size:14px;font-weight:600;color:var(--ink2);display:flex;align-items:center;gap:8px;font-family:var(--ui)}
-.tog{width:46px;height:26px;border-radius:13px;background:var(--bdr);cursor:pointer;position:relative;transition:background 0.25s;flex-shrink:0}
-.tog.on{background:linear-gradient(135deg,var(--em),var(--tl))}
-.togk{position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:#fff;transition:transform 0.25s;box-shadow:0 1px 5px rgba(0,0,0,0.22)}
-.tog.on .togk{transform:translateX(20px)}
-
-.jgrid{display:grid;grid-template-columns:repeat(5,1fr);gap:7px}
-.jbtn{
-  background:var(--card);border:1.5px solid var(--bdr);
-  border-radius:10px;padding:8px 3px;text-align:center;
-  cursor:pointer;transition:all 0.18s;
-}
-.jbtn:active,.jbtn.on{background:linear-gradient(135deg,var(--em),var(--tl));border-color:transparent}
-.jbtn.on .jn,.jbtn:active .jn{color:#fff}
-.jbtn.on .js,.jbtn:active .js{color:rgba(255,255,255,0.72)}
-.jn{font-size:13px;font-weight:700;color:var(--ink2);font-family:var(--en)}
-.js{font-size:9px;color:var(--ink4);margin-top:1px;font-family:var(--en)}
-
-.slwrap{max-height:310px;overflow-y:auto}
-.slwrap::-webkit-scrollbar{width:2px}
-.slwrap::-webkit-scrollbar-thumb{background:var(--bdr)}
-.slrow{display:flex;align-items:center;padding:9px 5px;border-bottom:1px solid rgba(184,131,26,0.08);cursor:pointer;gap:10px;border-radius:9px;transition:background 0.15s}
-.slrow:active{background:var(--em5)}
-.slnum{width:30px;height:30px;border-radius:8px;background:linear-gradient(135deg,var(--em),var(--tl));display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;flex-shrink:0;font-family:var(--en)}
-.sli{flex:1;min-width:0}
-.sle{font-size:13px;font-weight:700;color:var(--ink);font-family:var(--ui)}
-.slm{font-size:10px;color:var(--ink4);margin-top:1px;font-family:var(--en)}
-.sla{font-family:var(--ar);font-size:18px;color:var(--em);font-weight:600;flex-shrink:0}
-
-/* ============ MISC ============ */
-.empty{text-align:center;padding:70px 20px}
-.empty-ico{font-size:54px;opacity:0.22;margin-bottom:14px}
+/* ── MISC ── */
+.empty{text-align:center;padding:60px 20px}
+.empty-ico{font-size:52px;opacity:0.2;margin-bottom:12px}
 .empty-txt{color:var(--ink4);font-size:15px;line-height:1.9;font-family:var(--ui)}
-.loading{text-align:center;padding:56px 20px;color:var(--ink4);font-size:15px;font-family:var(--ui)}
-.spin{display:inline-block;font-size:34px;animation:sp 1.3s linear infinite;display:block;margin:0 auto 12px}
+.loading{text-align:center;padding:50px 20px;color:var(--ink4);font-family:var(--ui)}
+.spin{display:block;font-size:32px;animation:sp 1.3s linear infinite;margin:0 auto 10px}
 @keyframes sp{to{transform:rotate(360deg)}}
-.toast{
-  position:absolute;bottom:84px;left:50%;transform:translateX(-50%);
-  background:linear-gradient(135deg,var(--em),var(--tl));
-  color:#fff;padding:9px 22px;border-radius:24px;
-  font-size:13px;font-weight:700;z-index:999;white-space:nowrap;
-  animation:fio 2.4s ease forwards;
-  box-shadow:0 4px 22px rgba(11,94,69,0.42);
-  border:1px solid rgba(255,255,255,0.14);font-family:var(--ui);
-}
-@keyframes fio{0%{opacity:0;transform:translateX(-50%) translateY(10px)}12%{opacity:1;transform:translateX(-50%) translateY(0)}80%{opacity:1}100%{opacity:0}}
-.su{animation:su 0.3s cubic-bezier(.4,0,.2,1)}
-@keyframes su{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.toast{position:absolute;bottom:82px;left:50%;transform:translateX(-50%);background:var(--green);color:#fff;padding:9px 20px;border-radius:22px;font-size:13px;font-weight:700;z-index:999;white-space:nowrap;animation:fio 2.4s ease forwards;box-shadow:0 3px 18px rgba(26,112,72,0.42);border:1px solid rgba(255,255,255,0.15);font-family:var(--ui)}
+@keyframes fio{0%{opacity:0;transform:translateX(-50%) translateY(8px)}12%{opacity:1;transform:translateX(-50%) translateY(0)}82%{opacity:1}100%{opacity:0}}
+.su{animation:su 0.28s cubic-bezier(.4,0,.2,1)}
+@keyframes su{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
 </style>
 </head>
 <body>
@@ -497,123 +336,130 @@ body{font-family:var(--ui);color:var(--ink)}
 <script type="text/babel">
 const {useState,useEffect,useRef} = React;
 const API="https://api.alquran.cloud/v1";
-const AUDIO="https://cdn.islamic.network/quran/audio/128/ar.alafasy";
+
+// Sheikh audio endpoints
+const SHEIKHS=[
+  {id:"afasy",   ar:"الشيخ العفاسي",   en:"Al-Afasy",    url:"https://cdn.islamic.network/quran/audio/128/ar.alafasy"},
+  {id:"husary",  ar:"الشيخ الحصري",    en:"Al-Husary",   url:"https://cdn.islamic.network/quran/audio/128/ar.husary"},
+  {id:"sudais",  ar:"الشيخ السديس",    en:"Al-Sudais",   url:"https://cdn.islamic.network/quran/audio/128/ar.abdurrahmaansudais"},
+  {id:"minshawi",ar:"الشيخ المنشاوي",  en:"Al-Minshawi", url:"https://cdn.islamic.network/quran/audio/128/ar.minshawi"},
+];
 
 const SURAHS=[
-  {n:1,ar:"الفاتحة",en:"Al-Fatiha",v:7,t:"Meccan"},
-  {n:2,ar:"البقرة",en:"Al-Baqarah",v:286,t:"Medinan"},
-  {n:3,ar:"آل عمران",en:"Ali 'Imran",v:200,t:"Medinan"},
-  {n:4,ar:"النساء",en:"An-Nisa",v:176,t:"Medinan"},
-  {n:5,ar:"المائدة",en:"Al-Ma'idah",v:120,t:"Medinan"},
-  {n:6,ar:"الأنعام",en:"Al-An'am",v:165,t:"Meccan"},
-  {n:7,ar:"الأعراف",en:"Al-A'raf",v:206,t:"Meccan"},
-  {n:8,ar:"الأنفال",en:"Al-Anfal",v:75,t:"Medinan"},
-  {n:9,ar:"التوبة",en:"At-Tawbah",v:129,t:"Medinan"},
-  {n:10,ar:"يونس",en:"Yunus",v:109,t:"Meccan"},
-  {n:11,ar:"هود",en:"Hud",v:123,t:"Meccan"},
-  {n:12,ar:"يوسف",en:"Yusuf",v:111,t:"Meccan"},
-  {n:13,ar:"الرعد",en:"Ar-Ra'd",v:43,t:"Medinan"},
-  {n:14,ar:"إبراهيم",en:"Ibrahim",v:52,t:"Meccan"},
-  {n:15,ar:"الحجر",en:"Al-Hijr",v:99,t:"Meccan"},
-  {n:16,ar:"النحل",en:"An-Nahl",v:128,t:"Meccan"},
-  {n:17,ar:"الإسراء",en:"Al-Isra",v:111,t:"Meccan"},
-  {n:18,ar:"الكهف",en:"Al-Kahf",v:110,t:"Meccan"},
-  {n:19,ar:"مريم",en:"Maryam",v:98,t:"Meccan"},
-  {n:20,ar:"طه",en:"Ta-Ha",v:135,t:"Meccan"},
-  {n:21,ar:"الأنبياء",en:"Al-Anbiya",v:112,t:"Meccan"},
-  {n:22,ar:"الحج",en:"Al-Hajj",v:78,t:"Medinan"},
-  {n:23,ar:"المؤمنون",en:"Al-Mu'minun",v:118,t:"Meccan"},
-  {n:24,ar:"النور",en:"An-Nur",v:64,t:"Medinan"},
-  {n:25,ar:"الفرقان",en:"Al-Furqan",v:77,t:"Meccan"},
-  {n:26,ar:"الشعراء",en:"Ash-Shu'ara",v:227,t:"Meccan"},
-  {n:27,ar:"النمل",en:"An-Naml",v:93,t:"Meccan"},
-  {n:28,ar:"القصص",en:"Al-Qasas",v:88,t:"Meccan"},
-  {n:29,ar:"العنكبوت",en:"Al-'Ankabut",v:69,t:"Meccan"},
-  {n:30,ar:"الروم",en:"Ar-Rum",v:60,t:"Meccan"},
-  {n:31,ar:"لقمان",en:"Luqman",v:34,t:"Meccan"},
-  {n:32,ar:"السجدة",en:"As-Sajdah",v:30,t:"Meccan"},
-  {n:33,ar:"الأحزاب",en:"Al-Ahzab",v:73,t:"Medinan"},
-  {n:34,ar:"سبأ",en:"Saba",v:54,t:"Meccan"},
-  {n:35,ar:"فاطر",en:"Fatir",v:45,t:"Meccan"},
-  {n:36,ar:"يس",en:"Ya-Sin",v:83,t:"Meccan"},
-  {n:37,ar:"الصافات",en:"As-Saffat",v:182,t:"Meccan"},
-  {n:38,ar:"ص",en:"Sad",v:88,t:"Meccan"},
-  {n:39,ar:"الزمر",en:"Az-Zumar",v:75,t:"Meccan"},
-  {n:40,ar:"غافر",en:"Ghafir",v:85,t:"Meccan"},
-  {n:41,ar:"فصلت",en:"Fussilat",v:54,t:"Meccan"},
-  {n:42,ar:"الشورى",en:"Ash-Shura",v:53,t:"Meccan"},
-  {n:43,ar:"الزخرف",en:"Az-Zukhruf",v:89,t:"Meccan"},
-  {n:44,ar:"الدخان",en:"Ad-Dukhan",v:59,t:"Meccan"},
-  {n:45,ar:"الجاثية",en:"Al-Jathiyah",v:37,t:"Meccan"},
-  {n:46,ar:"الأحقاف",en:"Al-Ahqaf",v:35,t:"Meccan"},
-  {n:47,ar:"محمد",en:"Muhammad",v:38,t:"Medinan"},
-  {n:48,ar:"الفتح",en:"Al-Fath",v:29,t:"Medinan"},
-  {n:49,ar:"الحجرات",en:"Al-Hujurat",v:18,t:"Medinan"},
-  {n:50,ar:"ق",en:"Qaf",v:45,t:"Meccan"},
-  {n:51,ar:"الذاريات",en:"Adh-Dhariyat",v:60,t:"Meccan"},
-  {n:52,ar:"الطور",en:"At-Tur",v:49,t:"Meccan"},
-  {n:53,ar:"النجم",en:"An-Najm",v:62,t:"Meccan"},
-  {n:54,ar:"القمر",en:"Al-Qamar",v:55,t:"Meccan"},
-  {n:55,ar:"الرحمن",en:"Ar-Rahman",v:78,t:"Meccan"},
-  {n:56,ar:"الواقعة",en:"Al-Waqi'ah",v:96,t:"Meccan"},
-  {n:57,ar:"الحديد",en:"Al-Hadid",v:29,t:"Medinan"},
-  {n:58,ar:"المجادلة",en:"Al-Mujadila",v:22,t:"Medinan"},
-  {n:59,ar:"الحشر",en:"Al-Hashr",v:24,t:"Medinan"},
-  {n:60,ar:"الممتحنة",en:"Al-Mumtahanah",v:13,t:"Medinan"},
-  {n:61,ar:"الصف",en:"As-Saf",v:14,t:"Medinan"},
-  {n:62,ar:"الجمعة",en:"Al-Jumu'ah",v:11,t:"Medinan"},
-  {n:63,ar:"المنافقون",en:"Al-Munafiqun",v:11,t:"Medinan"},
-  {n:64,ar:"التغابن",en:"At-Taghabun",v:18,t:"Medinan"},
-  {n:65,ar:"الطلاق",en:"At-Talaq",v:12,t:"Medinan"},
-  {n:66,ar:"التحريم",en:"At-Tahrim",v:12,t:"Medinan"},
-  {n:67,ar:"الملك",en:"Al-Mulk",v:30,t:"Meccan"},
-  {n:68,ar:"القلم",en:"Al-Qalam",v:52,t:"Meccan"},
-  {n:69,ar:"الحاقة",en:"Al-Haqqah",v:52,t:"Meccan"},
-  {n:70,ar:"المعارج",en:"Al-Ma'arij",v:44,t:"Meccan"},
-  {n:71,ar:"نوح",en:"Nuh",v:28,t:"Meccan"},
-  {n:72,ar:"الجن",en:"Al-Jinn",v:28,t:"Meccan"},
-  {n:73,ar:"المزمل",en:"Al-Muzzammil",v:20,t:"Meccan"},
-  {n:74,ar:"المدثر",en:"Al-Muddaththir",v:56,t:"Meccan"},
-  {n:75,ar:"القيامة",en:"Al-Qiyamah",v:40,t:"Meccan"},
-  {n:76,ar:"الإنسان",en:"Al-Insan",v:31,t:"Medinan"},
-  {n:77,ar:"المرسلات",en:"Al-Mursalat",v:50,t:"Meccan"},
-  {n:78,ar:"النبأ",en:"An-Naba",v:40,t:"Meccan"},
-  {n:79,ar:"النازعات",en:"An-Nazi'at",v:46,t:"Meccan"},
-  {n:80,ar:"عبس",en:"'Abasa",v:42,t:"Meccan"},
-  {n:81,ar:"التكوير",en:"At-Takwir",v:29,t:"Meccan"},
-  {n:82,ar:"الانفطار",en:"Al-Infitar",v:19,t:"Meccan"},
-  {n:83,ar:"المطففين",en:"Al-Mutaffifin",v:36,t:"Meccan"},
-  {n:84,ar:"الانشقاق",en:"Al-Inshiqaq",v:25,t:"Meccan"},
-  {n:85,ar:"البروج",en:"Al-Buruj",v:22,t:"Meccan"},
-  {n:86,ar:"الطارق",en:"At-Tariq",v:17,t:"Meccan"},
-  {n:87,ar:"الأعلى",en:"Al-A'la",v:19,t:"Meccan"},
-  {n:88,ar:"الغاشية",en:"Al-Ghashiyah",v:26,t:"Meccan"},
-  {n:89,ar:"الفجر",en:"Al-Fajr",v:30,t:"Meccan"},
-  {n:90,ar:"البلد",en:"Al-Balad",v:20,t:"Meccan"},
-  {n:91,ar:"الشمس",en:"Ash-Shams",v:15,t:"Meccan"},
-  {n:92,ar:"الليل",en:"Al-Layl",v:21,t:"Meccan"},
-  {n:93,ar:"الضحى",en:"Ad-Duhaa",v:11,t:"Meccan"},
-  {n:94,ar:"الشرح",en:"Ash-Sharh",v:8,t:"Meccan"},
-  {n:95,ar:"التين",en:"At-Tin",v:8,t:"Meccan"},
-  {n:96,ar:"العلق",en:"Al-'Alaq",v:19,t:"Meccan"},
-  {n:97,ar:"القدر",en:"Al-Qadr",v:5,t:"Meccan"},
-  {n:98,ar:"البينة",en:"Al-Bayyinah",v:8,t:"Medinan"},
-  {n:99,ar:"الزلزلة",en:"Az-Zalzalah",v:8,t:"Medinan"},
-  {n:100,ar:"العاديات",en:"Al-'Adiyat",v:11,t:"Meccan"},
-  {n:101,ar:"القارعة",en:"Al-Qari'ah",v:11,t:"Meccan"},
-  {n:102,ar:"التكاثر",en:"At-Takathur",v:8,t:"Meccan"},
-  {n:103,ar:"العصر",en:"Al-'Asr",v:3,t:"Meccan"},
-  {n:104,ar:"الهمزة",en:"Al-Humazah",v:9,t:"Meccan"},
-  {n:105,ar:"الفيل",en:"Al-Fil",v:5,t:"Meccan"},
-  {n:106,ar:"قريش",en:"Quraysh",v:4,t:"Meccan"},
-  {n:107,ar:"الماعون",en:"Al-Ma'un",v:7,t:"Meccan"},
-  {n:108,ar:"الكوثر",en:"Al-Kawthar",v:3,t:"Meccan"},
-  {n:109,ar:"الكافرون",en:"Al-Kafirun",v:6,t:"Meccan"},
-  {n:110,ar:"النصر",en:"An-Nasr",v:3,t:"Medinan"},
-  {n:111,ar:"المسد",en:"Al-Masad",v:5,t:"Meccan"},
-  {n:112,ar:"الإخلاص",en:"Al-Ikhlas",v:4,t:"Meccan"},
-  {n:113,ar:"الفلق",en:"Al-Falaq",v:5,t:"Meccan"},
-  {n:114,ar:"الناس",en:"An-Nas",v:6,t:"Meccan"},
+  {n:1,ar:"سورة الفاتحة",arShort:"الفاتحة",en:"Al-Fatiha",v:7,tar:"مكية",ten:"Meccan",pg:1},
+  {n:2,ar:"سورة البقرة",arShort:"البقرة",en:"Al-Baqarah",v:286,tar:"مدنية",ten:"Medinan",pg:2},
+  {n:3,ar:"سورة آل عمران",arShort:"آل عمران",en:"Ali 'Imran",v:200,tar:"مدنية",ten:"Medinan",pg:50},
+  {n:4,ar:"سورة النساء",arShort:"النساء",en:"An-Nisa",v:176,tar:"مدنية",ten:"Medinan",pg:77},
+  {n:5,ar:"سورة المائدة",arShort:"المائدة",en:"Al-Ma'idah",v:120,tar:"مدنية",ten:"Medinan",pg:106},
+  {n:6,ar:"سورة الأنعام",arShort:"الأنعام",en:"Al-An'am",v:165,tar:"مكية",ten:"Meccan",pg:128},
+  {n:7,ar:"سورة الأعراف",arShort:"الأعراف",en:"Al-A'raf",v:206,tar:"مكية",ten:"Meccan",pg:151},
+  {n:8,ar:"سورة الأنفال",arShort:"الأنفال",en:"Al-Anfal",v:75,tar:"مدنية",ten:"Medinan",pg:177},
+  {n:9,ar:"سورة التوبة",arShort:"التوبة",en:"At-Tawbah",v:129,tar:"مدنية",ten:"Medinan",pg:187},
+  {n:10,ar:"سورة يونس",arShort:"يونس",en:"Yunus",v:109,tar:"مكية",ten:"Meccan",pg:208},
+  {n:11,ar:"سورة هود",arShort:"هود",en:"Hud",v:123,tar:"مكية",ten:"Meccan",pg:221},
+  {n:12,ar:"سورة يوسف",arShort:"يوسف",en:"Yusuf",v:111,tar:"مكية",ten:"Meccan",pg:233},
+  {n:13,ar:"سورة الرعد",arShort:"الرعد",en:"Ar-Ra'd",v:43,tar:"مدنية",ten:"Medinan",pg:249},
+  {n:14,ar:"سورة إبراهيم",arShort:"إبراهيم",en:"Ibrahim",v:52,tar:"مكية",ten:"Meccan",pg:255},
+  {n:15,ar:"سورة الحجر",arShort:"الحجر",en:"Al-Hijr",v:99,tar:"مكية",ten:"Meccan",pg:262},
+  {n:16,ar:"سورة النحل",arShort:"النحل",en:"An-Nahl",v:128,tar:"مكية",ten:"Meccan",pg:267},
+  {n:17,ar:"سورة الإسراء",arShort:"الإسراء",en:"Al-Isra",v:111,tar:"مكية",ten:"Meccan",pg:282},
+  {n:18,ar:"سورة الكهف",arShort:"الكهف",en:"Al-Kahf",v:110,tar:"مكية",ten:"Meccan",pg:293},
+  {n:19,ar:"سورة مريم",arShort:"مريم",en:"Maryam",v:98,tar:"مكية",ten:"Meccan",pg:305},
+  {n:20,ar:"سورة طه",arShort:"طه",en:"Ta-Ha",v:135,tar:"مكية",ten:"Meccan",pg:312},
+  {n:21,ar:"سورة الأنبياء",arShort:"الأنبياء",en:"Al-Anbiya",v:112,tar:"مكية",ten:"Meccan",pg:322},
+  {n:22,ar:"سورة الحج",arShort:"الحج",en:"Al-Hajj",v:78,tar:"مدنية",ten:"Medinan",pg:332},
+  {n:23,ar:"سورة المؤمنون",arShort:"المؤمنون",en:"Al-Mu'minun",v:118,tar:"مكية",ten:"Meccan",pg:342},
+  {n:24,ar:"سورة النور",arShort:"النور",en:"An-Nur",v:64,tar:"مدنية",ten:"Medinan",pg:350},
+  {n:25,ar:"سورة الفرقان",arShort:"الفرقان",en:"Al-Furqan",v:77,tar:"مكية",ten:"Meccan",pg:359},
+  {n:26,ar:"سورة الشعراء",arShort:"الشعراء",en:"Ash-Shu'ara",v:227,tar:"مكية",ten:"Meccan",pg:367},
+  {n:27,ar:"سورة النمل",arShort:"النمل",en:"An-Naml",v:93,tar:"مكية",ten:"Meccan",pg:377},
+  {n:28,ar:"سورة القصص",arShort:"القصص",en:"Al-Qasas",v:88,tar:"مكية",ten:"Meccan",pg:385},
+  {n:29,ar:"سورة العنكبوت",arShort:"العنكبوت",en:"Al-'Ankabut",v:69,tar:"مكية",ten:"Meccan",pg:396},
+  {n:30,ar:"سورة الروم",arShort:"الروم",en:"Ar-Rum",v:60,tar:"مكية",ten:"Meccan",pg:404},
+  {n:31,ar:"سورة لقمان",arShort:"لقمان",en:"Luqman",v:34,tar:"مكية",ten:"Meccan",pg:411},
+  {n:32,ar:"سورة السجدة",arShort:"السجدة",en:"As-Sajdah",v:30,tar:"مكية",ten:"Meccan",pg:415},
+  {n:33,ar:"سورة الأحزاب",arShort:"الأحزاب",en:"Al-Ahzab",v:73,tar:"مدنية",ten:"Medinan",pg:418},
+  {n:34,ar:"سورة سبأ",arShort:"سبأ",en:"Saba",v:54,tar:"مكية",ten:"Meccan",pg:428},
+  {n:35,ar:"سورة فاطر",arShort:"فاطر",en:"Fatir",v:45,tar:"مكية",ten:"Meccan",pg:434},
+  {n:36,ar:"سورة يس",arShort:"يس",en:"Ya-Sin",v:83,tar:"مكية",ten:"Meccan",pg:440},
+  {n:37,ar:"سورة الصافات",arShort:"الصافات",en:"As-Saffat",v:182,tar:"مكية",ten:"Meccan",pg:446},
+  {n:38,ar:"سورة ص",arShort:"ص",en:"Sad",v:88,tar:"مكية",ten:"Meccan",pg:453},
+  {n:39,ar:"سورة الزمر",arShort:"الزمر",en:"Az-Zumar",v:75,tar:"مكية",ten:"Meccan",pg:458},
+  {n:40,ar:"سورة غافر",arShort:"غافر",en:"Ghafir",v:85,tar:"مكية",ten:"Meccan",pg:467},
+  {n:41,ar:"سورة فصلت",arShort:"فصلت",en:"Fussilat",v:54,tar:"مكية",ten:"Meccan",pg:477},
+  {n:42,ar:"سورة الشورى",arShort:"الشورى",en:"Ash-Shura",v:53,tar:"مكية",ten:"Meccan",pg:483},
+  {n:43,ar:"سورة الزخرف",arShort:"الزخرف",en:"Az-Zukhruf",v:89,tar:"مكية",ten:"Meccan",pg:489},
+  {n:44,ar:"سورة الدخان",arShort:"الدخان",en:"Ad-Dukhan",v:59,tar:"مكية",ten:"Meccan",pg:496},
+  {n:45,ar:"سورة الجاثية",arShort:"الجاثية",en:"Al-Jathiyah",v:37,tar:"مكية",ten:"Meccan",pg:499},
+  {n:46,ar:"سورة الأحقاف",arShort:"الأحقاف",en:"Al-Ahqaf",v:35,tar:"مكية",ten:"Meccan",pg:502},
+  {n:47,ar:"سورة محمد",arShort:"محمد",en:"Muhammad",v:38,tar:"مدنية",ten:"Medinan",pg:507},
+  {n:48,ar:"سورة الفتح",arShort:"الفتح",en:"Al-Fath",v:29,tar:"مدنية",ten:"Medinan",pg:511},
+  {n:49,ar:"سورة الحجرات",arShort:"الحجرات",en:"Al-Hujurat",v:18,tar:"مدنية",ten:"Medinan",pg:515},
+  {n:50,ar:"سورة ق",arShort:"ق",en:"Qaf",v:45,tar:"مكية",ten:"Meccan",pg:518},
+  {n:51,ar:"سورة الذاريات",arShort:"الذاريات",en:"Adh-Dhariyat",v:60,tar:"مكية",ten:"Meccan",pg:520},
+  {n:52,ar:"سورة الطور",arShort:"الطور",en:"At-Tur",v:49,tar:"مكية",ten:"Meccan",pg:523},
+  {n:53,ar:"سورة النجم",arShort:"النجم",en:"An-Najm",v:62,tar:"مكية",ten:"Meccan",pg:526},
+  {n:54,ar:"سورة القمر",arShort:"القمر",en:"Al-Qamar",v:55,tar:"مكية",ten:"Meccan",pg:528},
+  {n:55,ar:"سورة الرحمن",arShort:"الرحمن",en:"Ar-Rahman",v:78,tar:"مدنية",ten:"Medinan",pg:531},
+  {n:56,ar:"سورة الواقعة",arShort:"الواقعة",en:"Al-Waqi'ah",v:96,tar:"مكية",ten:"Meccan",pg:534},
+  {n:57,ar:"سورة الحديد",arShort:"الحديد",en:"Al-Hadid",v:29,tar:"مدنية",ten:"Medinan",pg:537},
+  {n:58,ar:"سورة المجادلة",arShort:"المجادلة",en:"Al-Mujadila",v:22,tar:"مدنية",ten:"Medinan",pg:542},
+  {n:59,ar:"سورة الحشر",arShort:"الحشر",en:"Al-Hashr",v:24,tar:"مدنية",ten:"Medinan",pg:545},
+  {n:60,ar:"سورة الممتحنة",arShort:"الممتحنة",en:"Al-Mumtahanah",v:13,tar:"مدنية",ten:"Medinan",pg:549},
+  {n:61,ar:"سورة الصف",arShort:"الصف",en:"As-Saf",v:14,tar:"مدنية",ten:"Medinan",pg:551},
+  {n:62,ar:"سورة الجمعة",arShort:"الجمعة",en:"Al-Jumu'ah",v:11,tar:"مدنية",ten:"Medinan",pg:553},
+  {n:63,ar:"سورة المنافقون",arShort:"المنافقون",en:"Al-Munafiqun",v:11,tar:"مدنية",ten:"Medinan",pg:554},
+  {n:64,ar:"سورة التغابن",arShort:"التغابن",en:"At-Taghabun",v:18,tar:"مدنية",ten:"Medinan",pg:556},
+  {n:65,ar:"سورة الطلاق",arShort:"الطلاق",en:"At-Talaq",v:12,tar:"مدنية",ten:"Medinan",pg:558},
+  {n:66,ar:"سورة التحريم",arShort:"التحريم",en:"At-Tahrim",v:12,tar:"مدنية",ten:"Medinan",pg:560},
+  {n:67,ar:"سورة الملك",arShort:"الملك",en:"Al-Mulk",v:30,tar:"مكية",ten:"Meccan",pg:562},
+  {n:68,ar:"سورة القلم",arShort:"القلم",en:"Al-Qalam",v:52,tar:"مكية",ten:"Meccan",pg:564},
+  {n:69,ar:"سورة الحاقة",arShort:"الحاقة",en:"Al-Haqqah",v:52,tar:"مكية",ten:"Meccan",pg:566},
+  {n:70,ar:"سورة المعارج",arShort:"المعارج",en:"Al-Ma'arij",v:44,tar:"مكية",ten:"Meccan",pg:568},
+  {n:71,ar:"سورة نوح",arShort:"نوح",en:"Nuh",v:28,tar:"مكية",ten:"Meccan",pg:570},
+  {n:72,ar:"سورة الجن",arShort:"الجن",en:"Al-Jinn",v:28,tar:"مكية",ten:"Meccan",pg:572},
+  {n:73,ar:"سورة المزمل",arShort:"المزمل",en:"Al-Muzzammil",v:20,tar:"مكية",ten:"Meccan",pg:574},
+  {n:74,ar:"سورة المدثر",arShort:"المدثر",en:"Al-Muddaththir",v:56,tar:"مكية",ten:"Meccan",pg:575},
+  {n:75,ar:"سورة القيامة",arShort:"القيامة",en:"Al-Qiyamah",v:40,tar:"مكية",ten:"Meccan",pg:577},
+  {n:76,ar:"سورة الإنسان",arShort:"الإنسان",en:"Al-Insan",v:31,tar:"مدنية",ten:"Medinan",pg:578},
+  {n:77,ar:"سورة المرسلات",arShort:"المرسلات",en:"Al-Mursalat",v:50,tar:"مكية",ten:"Meccan",pg:580},
+  {n:78,ar:"سورة النبأ",arShort:"النبأ",en:"An-Naba",v:40,tar:"مكية",ten:"Meccan",pg:582},
+  {n:79,ar:"سورة النازعات",arShort:"النازعات",en:"An-Nazi'at",v:46,tar:"مكية",ten:"Meccan",pg:583},
+  {n:80,ar:"سورة عبس",arShort:"عبس",en:"'Abasa",v:42,tar:"مكية",ten:"Meccan",pg:585},
+  {n:81,ar:"سورة التكوير",arShort:"التكوير",en:"At-Takwir",v:29,tar:"مكية",ten:"Meccan",pg:586},
+  {n:82,ar:"سورة الانفطار",arShort:"الانفطار",en:"Al-Infitar",v:19,tar:"مكية",ten:"Meccan",pg:587},
+  {n:83,ar:"سورة المطففين",arShort:"المطففين",en:"Al-Mutaffifin",v:36,tar:"مكية",ten:"Meccan",pg:587},
+  {n:84,ar:"سورة الانشقاق",arShort:"الانشقاق",en:"Al-Inshiqaq",v:25,tar:"مكية",ten:"Meccan",pg:589},
+  {n:85,ar:"سورة البروج",arShort:"البروج",en:"Al-Buruj",v:22,tar:"مكية",ten:"Meccan",pg:590},
+  {n:86,ar:"سورة الطارق",arShort:"الطارق",en:"At-Tariq",v:17,tar:"مكية",ten:"Meccan",pg:591},
+  {n:87,ar:"سورة الأعلى",arShort:"الأعلى",en:"Al-A'la",v:19,tar:"مكية",ten:"Meccan",pg:591},
+  {n:88,ar:"سورة الغاشية",arShort:"الغاشية",en:"Al-Ghashiyah",v:26,tar:"مكية",ten:"Meccan",pg:592},
+  {n:89,ar:"سورة الفجر",arShort:"الفجر",en:"Al-Fajr",v:30,tar:"مكية",ten:"Meccan",pg:593},
+  {n:90,ar:"سورة البلد",arShort:"البلد",en:"Al-Balad",v:20,tar:"مكية",ten:"Meccan",pg:594},
+  {n:91,ar:"سورة الشمس",arShort:"الشمس",en:"Ash-Shams",v:15,tar:"مكية",ten:"Meccan",pg:595},
+  {n:92,ar:"سورة الليل",arShort:"الليل",en:"Al-Layl",v:21,tar:"مكية",ten:"Meccan",pg:595},
+  {n:93,ar:"سورة الضحى",arShort:"الضحى",en:"Ad-Duhaa",v:11,tar:"مكية",ten:"Meccan",pg:596},
+  {n:94,ar:"سورة الشرح",arShort:"الشرح",en:"Ash-Sharh",v:8,tar:"مكية",ten:"Meccan",pg:596},
+  {n:95,ar:"سورة التين",arShort:"التين",en:"At-Tin",v:8,tar:"مكية",ten:"Meccan",pg:597},
+  {n:96,ar:"سورة العلق",arShort:"العلق",en:"Al-'Alaq",v:19,tar:"مكية",ten:"Meccan",pg:597},
+  {n:97,ar:"سورة القدر",arShort:"القدر",en:"Al-Qadr",v:5,tar:"مكية",ten:"Meccan",pg:598},
+  {n:98,ar:"سورة البينة",arShort:"البينة",en:"Al-Bayyinah",v:8,tar:"مدنية",ten:"Medinan",pg:598},
+  {n:99,ar:"سورة الزلزلة",arShort:"الزلزلة",en:"Az-Zalzalah",v:8,tar:"مدنية",ten:"Medinan",pg:599},
+  {n:100,ar:"سورة العاديات",arShort:"العاديات",en:"Al-'Adiyat",v:11,tar:"مكية",ten:"Meccan",pg:599},
+  {n:101,ar:"سورة القارعة",arShort:"القارعة",en:"Al-Qari'ah",v:11,tar:"مكية",ten:"Meccan",pg:600},
+  {n:102,ar:"سورة التكاثر",arShort:"التكاثر",en:"At-Takathur",v:8,tar:"مكية",ten:"Meccan",pg:600},
+  {n:103,ar:"سورة العصر",arShort:"العصر",en:"Al-'Asr",v:3,tar:"مكية",ten:"Meccan",pg:601},
+  {n:104,ar:"سورة الهمزة",arShort:"الهمزة",en:"Al-Humazah",v:9,tar:"مكية",ten:"Meccan",pg:601},
+  {n:105,ar:"سورة الفيل",arShort:"الفيل",en:"Al-Fil",v:5,tar:"مكية",ten:"Meccan",pg:601},
+  {n:106,ar:"سورة قريش",arShort:"قريش",en:"Quraysh",v:4,tar:"مكية",ten:"Meccan",pg:602},
+  {n:107,ar:"سورة الماعون",arShort:"الماعون",en:"Al-Ma'un",v:7,tar:"مكية",ten:"Meccan",pg:602},
+  {n:108,ar:"سورة الكوثر",arShort:"الكوثر",en:"Al-Kawthar",v:3,tar:"مكية",ten:"Meccan",pg:602},
+  {n:109,ar:"سورة الكافرون",arShort:"الكافرون",en:"Al-Kafirun",v:6,tar:"مكية",ten:"Meccan",pg:603},
+  {n:110,ar:"سورة النصر",arShort:"النصر",en:"An-Nasr",v:3,tar:"مدنية",ten:"Medinan",pg:603},
+  {n:111,ar:"سورة المسد",arShort:"المسد",en:"Al-Masad",v:5,tar:"مكية",ten:"Meccan",pg:603},
+  {n:112,ar:"سورة الإخلاص",arShort:"الإخلاص",en:"Al-Ikhlas",v:4,tar:"مكية",ten:"Meccan",pg:604},
+  {n:113,ar:"سورة الفلق",arShort:"الفلق",en:"Al-Falaq",v:5,tar:"مكية",ten:"Meccan",pg:604},
+  {n:114,ar:"سورة الناس",arShort:"الناس",en:"An-Nas",v:6,tar:"مكية",ten:"Meccan",pg:604},
 ];
 const JUZ=[
   {j:1,s:1},
@@ -648,13 +494,89 @@ const JUZ=[
   {j:30,s:78},
 ];
 const BISM="بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ";
-const PRAYERS=["Fajr","Sunrise","Dhuhr","Asr","Maghrib","Isha"];
+const PNAMES_AR={Fajr:"الفجر",Dhuhr:"الظهر",Asr:"العصر",Maghrib:"المغرب",Isha:"العشاء"};
+const PNAMES_EN={Fajr:"Fajr",Dhuhr:"Dhuhr",Asr:"Asr",Maghrib:"Maghrib",Isha:"Isha"};
 const PICO={Fajr:"🌅",Sunrise:"🌄",Dhuhr:"☀️",Asr:"🌤️",Maghrib:"🌇",Isha:"🌙"};
+const PRAYERS_MAIN=["Fajr","Dhuhr","Asr","Maghrib","Isha"];
+
+// ── ATHKAR DATA ──
+const ATHKAR_CATS=[
+  {id:"morning", ar:"أذكار الصباح",  en:"Morning",  ico:"🌅", col:"morning"},
+  {id:"evening", ar:"أذكار المساء",  en:"Evening",  ico:"🌙", col:"evening"},
+  {id:"sleep",   ar:"أذكار النوم",   en:"Sleep",    ico:"😴", col:"sleep"},
+  {id:"prayer",  ar:"أذكار الصلاة",  en:"Prayer",   ico:"🕌", col:"prayer"},
+  {id:"quran",   ar:"أدعية من القرآن",en:"Quranic", ico:"📖", col:"quran"},
+];
+
+const ATHKAR_DATA={
+  morning:[
+    {ar:"أَصْبَحْنَا وَأَصْبَحَ الْمُلْكُ لِلَّهِ، وَالْحَمْدُ لِلَّهِ، لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ",tr:"أصبحنا وأصبح الملك لله، أسأل الله خير هذا اليوم وخير ما بعده",source:"رواه مسلم",rep:1},
+    {ar:"اللَّهُمَّ بِكَ أَصْبَحْنَا، وَبِكَ أَمْسَيْنَا، وَبِكَ نَحْيَا، وَبِكَ نَمُوتُ وَإِلَيْكَ النُّشُورُ",tr:"اللهم بك أصبحنا وبك نحيا وبك نموت",source:"رواه الترمذي",rep:1},
+    {ar:"اللَّهُمَّ أَنْتَ رَبِّي لَا إِلَهَ إِلَّا أَنْتَ، خَلَقْتَنِي وَأَنَا عَبْدُكَ، وَأَنَا عَلَى عَهْدِكَ وَوَعْدِكَ مَا اسْتَطَعْتُ، أَعُوذُ بِكَ مِنْ شَرِّ مَا صَنَعْتُ",tr:"سيد الاستغفار - من قاله موقناً فمات من يومه دخل الجنة",source:"رواه البخاري",rep:1},
+    {ar:"سُبْحَانَ اللَّهِ وَبِحَمْدِهِ",tr:"سبحان الله وبحمده",source:"رواه مسلم",rep:100},
+    {ar:"لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ",tr:"من قالها مائة مرة كانت له عدل عشر رقاب",source:"رواه البخاري",rep:10},
+    {ar:"اللَّهُمَّ عَافِنِي فِي بَدَنِي، اللَّهُمَّ عَافِنِي فِي سَمْعِي، اللَّهُمَّ عَافِنِي فِي بَصَرِي، لَا إِلَهَ إِلَّا أَنْتَ",tr:"اللهم عافني في بدني وسمعي وبصري",source:"رواه أبو داود",rep:3},
+    {ar:"حَسْبِيَ اللَّهُ لَا إِلَهَ إِلَّا هُوَ عَلَيْهِ تَوَكَّلْتُ وَهُوَ رَبُّ الْعَرْشِ الْعَظِيمِ",tr:"حسبي الله لا إله إلا هو",source:"رواه أبو داود",rep:7},
+  ],
+  evening:[
+    {ar:"أَمْسَيْنَا وَأَمْسَى الْمُلْكُ لِلَّهِ، وَالْحَمْدُ لِلَّهِ، لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ",tr:"أمسينا وأمسى الملك لله",source:"رواه مسلم",rep:1},
+    {ar:"اللَّهُمَّ بِكَ أَمْسَيْنَا، وَبِكَ أَصْبَحْنَا، وَبِكَ نَحْيَا، وَبِكَ نَمُوتُ وَإِلَيْكَ الْمَصِيرُ",tr:"اللهم بك أمسينا وبك نحيا وإليك المصير",source:"رواه الترمذي",rep:1},
+    {ar:"اللَّهُمَّ إِنِّي أَمْسَيْتُ أُشْهِدُكَ وَأُشْهِدُ حَمَلَةَ عَرْشِكَ وَمَلَائِكَتَكَ وَجَمِيعَ خَلْقِكَ، أَنَّكَ أَنْتَ اللَّهُ لَا إِلَهَ إِلَّا أَنْتَ وَحْدَكَ لَا شَرِيكَ لَكَ",tr:"اللهم إني أمسيت أشهدك",source:"رواه أبو داود",rep:4},
+    {ar:"اللَّهُمَّ مَا أَمْسَى بِي مِنْ نِعْمَةٍ أَوْ بِأَحَدٍ مِنْ خَلْقِكَ فَمِنْكَ وَحْدَكَ لَا شَرِيكَ لَكَ، فَلَكَ الْحَمْدُ وَلَكَ الشُّكْرُ",tr:"اللهم ما أمسى بي من نعمة فمنك",source:"رواه أبو داود",rep:1},
+    {ar:"أَعُوذُ بِكَلِمَاتِ اللَّهِ التَّامَّاتِ مِنْ شَرِّ مَا خَلَقَ",tr:"من قالها ثلاثاً لم تضره حمة تلك الليلة",source:"رواه الترمذي",rep:3},
+  ],
+  sleep:[
+    {ar:"بِاسْمِكَ اللَّهُمَّ أَمُوتُ وَأَحْيَا",tr:"باسمك اللهم أموت وأحيا",source:"رواه البخاري",rep:1},
+    {ar:"اللَّهُمَّ قِنِي عَذَابَكَ يَوْمَ تَبْعَثُ عِبَادَكَ",tr:"اللهم قني عذابك يوم تبعث عبادك",source:"رواه أبو داود",rep:3},
+    {ar:"سُبْحَانَكَ اللَّهُمَّ رَبِّي بِكَ أَضَعُ جَنْبِي، وَبِكَ أَرْفَعُهُ، فَإِنْ أَمْسَكْتَ نَفْسِي فَارْحَمْهَا، وَإِنْ أَرْسَلْتَهَا فَاحْفَظْهَا بِمَا تَحْفَظُ بِهِ عِبَادَكَ الصَّالِحِينَ",tr:"سبحانك اللهم ربي بك أضع جنبي",source:"رواه البخاري",rep:1},
+    {ar:"اللَّهُمَّ أَسْلَمْتُ نَفْسِي إِلَيْكَ، وَفَوَّضْتُ أَمْرِي إِلَيْكَ، وَأَلْجَأْتُ ظَهْرِي إِلَيْكَ، رَهْبَةً وَرَغْبَةً إِلَيْكَ",tr:"اللهم أسلمت نفسي إليك",source:"رواه البخاري",rep:1},
+    {ar:"آيَةُ الْكُرْسِيّ: اللَّهُ لَا إِلَهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ...",tr:"من قرأها حين يأخذ مضجعه لم يزل عليه من الله حافظ",source:"رواه البخاري",rep:1},
+    {ar:"قُلْ هُوَ اللَّهُ أَحَدٌ ۝ اللَّهُ الصَّمَدُ ۝ لَمْ يَلِدْ وَلَمْ يُولَدْ ۝ وَلَمْ يَكُن لَّهُ كُفُوًا أَحَدٌ",tr:"الإخلاص والمعوذتان - من قرأهن ثلاثاً كفتاه من كل شيء",source:"رواه أبو داود",rep:3},
+  ],
+  prayer:[
+    {ar:"أَسْتَغْفِرُ اللَّهَ",tr:"أستغفر الله",source:"يقال ثلاثاً بعد الصلاة",rep:3},
+    {ar:"اللَّهُمَّ أَنْتَ السَّلَامُ وَمِنْكَ السَّلَامُ، تَبَارَكْتَ يَا ذَا الْجَلَالِ وَالْإِكْرَامِ",tr:"اللهم أنت السلام ومنك السلام",source:"رواه مسلم",rep:1},
+    {ar:"لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ، لَهُ الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ، اللَّهُمَّ لَا مَانِعَ لِمَا أَعْطَيْتَ وَلَا مُعْطِيَ لِمَا مَنَعْتَ",tr:"لا إله إلا الله وحده لا شريك له...",source:"رواه البخاري",rep:1},
+    {ar:"سُبْحَانَ اللَّهِ",tr:"سبحان الله",source:"التسبيح بعد الصلاة",rep:33},
+    {ar:"الْحَمْدُ لِلَّهِ",tr:"الحمد لله",source:"التحميد بعد الصلاة",rep:33},
+    {ar:"اللَّهُ أَكْبَرُ",tr:"الله أكبر",source:"التكبير بعد الصلاة",rep:33},
+    {ar:"اللَّهُمَّ أَعِنِّي عَلَى ذِكْرِكَ وَشُكْرِكَ وَحُسْنِ عِبَادَتِكَ",tr:"اللهم أعني على ذكرك وشكرك",source:"رواه أبو داود",rep:1},
+  ],
+  quran:[
+    {ar:"رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ",tr:"دعاء الدنيا والآخرة",source:"البقرة: 201",rep:1},
+    {ar:"رَبَّنَا لَا تُزِغْ قُلُوبَنَا بَعْدَ إِذْ هَدَيْتَنَا وَهَبْ لَنَا مِن لَّدُنكَ رَحْمَةً ۚ إِنَّكَ أَنتَ الْوَهَّابُ",tr:"ربنا لا تزغ قلوبنا",source:"آل عمران: 8",rep:1},
+    {ar:"رَبِّ اشْرَحْ لِي صَدْرِي ۝ وَيَسِّرْ لِي أَمْرِي ۝ وَاحْلُلْ عُقْدَةً مِّن لِّسَانِي ۝ يَفْقَهُوا قَوْلِي",tr:"دعاء موسى عليه السلام",source:"طه: 25-28",rep:1},
+    {ar:"رَّبِّ زِدْنِي عِلْمًا",tr:"ربي زدني علماً",source:"طه: 114",rep:1},
+    {ar:"رَبَّنَا هَبْ لَنَا مِنْ أَزْوَاجِنَا وَذُرِّيَّاتِنَا قُرَّةَ أَعْيُنٍ وَاجْعَلْنَا لِلْمُتَّقِينَ إِمَامًا",tr:"ربنا هب لنا من أزواجنا وذرياتنا قرة أعين",source:"الفرقان: 74",rep:1},
+    {ar:"حَسْبُنَا اللَّهُ وَنِعْمَ الْوَكِيلُ",tr:"حسبنا الله ونعم الوكيل",source:"آل عمران: 173",rep:3},
+    {ar:"لَا إِلَهَ إِلَّا أَنتَ سُبْحَانَكَ إِنِّي كُنتُ مِنَ الظَّالِمِينَ",tr:"دعاء يونس عليه السلام من الظلمات",source:"الأنبياء: 87",rep:1},
+    {ar:"رَبِّ أَوْزِعْنِي أَنْ أَشْكُرَ نِعْمَتَكَ الَّتِي أَنْعَمْتَ عَلَيَّ وَعَلَىٰ وَالِدَيَّ وَأَنْ أَعْمَلَ صَالِحًا تَرْضَاهُ",tr:"ربي أوزعني أن أشكر نعمتك",source:"النمل: 19",rep:1},
+  ],
+};
 
 function Tog({on,fn}){return<div className={`tog${on?" on":""}`}onClick={fn}><div className="togk"/></div>}
 
+function useCountdown(t){
+  const [cd,setCd]=useState("--:--:--");
+  useEffect(()=>{
+    if(!t)return;
+    const tick=()=>{
+      const now=new Date();
+      const[h,m]=t.split(":").map(Number);
+      const tgt=new Date(now);tgt.setHours(h,m,0,0);
+      if(tgt<now)tgt.setDate(tgt.getDate()+1);
+      const d=Math.max(0,tgt-now);
+      setCd([Math.floor(d/3600000),Math.floor((d%3600000)/60000),Math.floor((d%60000)/1000)].map(x=>String(x).padStart(2,"0")).join(":"));
+    };
+    tick();const id=setInterval(tick,1000);return()=>clearInterval(id);
+  },[t]);
+  return cd;
+}
+
 function App(){
   const [tab,setTab]=useState("home");
+  const [surahTab,setSurahTab]=useState("surahs");
+  const [isAr,setIsAr]=useState(true);
   const [surah,setSurah]=useState(null);
   const [verses,setVerses]=useState([]);
   const [trans,setTrans]=useState([]);
@@ -674,18 +596,26 @@ function App(){
   const [toast,setToast]=useState(null);
   const [curJuz,setCurJuz]=useState(1);
   const [q,setQ]=useState("");
+  const [sheikhIdx,setSheikhIdx]=useState(0);
+  // Athkar state
+  const [athCat,setAthCat]=useState(null);
+  const [zikrCounts,setZikrCounts]=useState({});
   const aud=useRef(null);
   const pageRef=useRef(null);
   const ayRefs=useRef({});
   const ntimer=useRef(null);
+  const cd=useCountdown(pt&&nextP?pt[nextP]:null);
 
   useEffect(()=>{document.documentElement.className=dark?"dark":"";},[dark]);
   const msg=(t)=>{setToast(t);setTimeout(()=>setToast(null),2400);};
+  const L=(ar,en)=>isAr?ar:en;
 
-  const openSurah=async(s,scrollTop=true)=>{
+  const curSheikhUrl=SHEIKHS[sheikhIdx].url;
+
+  const openSurah=async(s)=>{
     setSurah(s);setTab("reader");setVerses([]);setTrans([]);
     setLoading(true);stopAudio();setSelV(null);
-    if(scrollTop&&pageRef.current)pageRef.current.scrollTop=0;
+    if(pageRef.current)pageRef.current.scrollTop=0;
     try{
       const[a,e]=await Promise.all([
         fetch(`${API}/surah/${s.n}`).then(r=>r.json()),
@@ -693,7 +623,7 @@ function App(){
       ]);
       setVerses(a.data?.ayahs||[]);
       setTrans(e.data?.ayahs||[]);
-    }catch{msg("Failed to load. Check connection.");}
+    }catch{msg(L("فشل التحميل","Failed to load"));}
     setLoading(false);
   };
 
@@ -705,7 +635,7 @@ function App(){
 
   const playAyah=(num,globalNum,allV)=>{
     stopAudio();
-    const a=new Audio(`${AUDIO}/${globalNum}.mp3`);
+    const a=new Audio(`${curSheikhUrl}/${globalNum}.mp3`);
     aud.current=a;
     a.ontimeupdate=()=>{if(a.duration)setProg(a.currentTime/a.duration*100);};
     a.onended=()=>{
@@ -715,16 +645,14 @@ function App(){
       if(idx<arr.length-1){
         const nv=arr[idx+1];
         ntimer.current=setTimeout(()=>playAyah(nv.numberInSurah,nv.number,arr),350);
-      }else{setPlayV(null);}
+      }else setPlayV(null);
     };
-    a.onerror=()=>msg("Audio unavailable");
-    a.play().then(()=>{setPlayV(num);setPlaying(true);}).catch(()=>msg("Audio unavailable"));
-    if(autoScroll){
-      setTimeout(()=>{
-        const el=ayRefs.current[num];
-        if(el&&pageRef.current)el.scrollIntoView({behavior:"smooth",block:"center"});
-      },220);
-    }
+    a.onerror=()=>msg(L("الصوت غير متاح","Audio unavailable"));
+    a.play().then(()=>{setPlayV(num);setPlaying(true);}).catch(()=>msg(L("الصوت غير متاح","Audio unavailable")));
+    if(autoScroll)setTimeout(()=>{
+      const el=ayRefs.current[num];
+      if(el&&pageRef.current)el.scrollIntoView({behavior:"smooth",block:"center"});
+    },220);
   };
 
   const togglePlay=()=>{
@@ -737,203 +665,382 @@ function App(){
     const id=`${s.n}:${v.numberInSurah}`;
     setBms(prev=>{
       const has=prev.find(b=>b.id===id);
-      if(has){msg("Bookmark removed");return prev.filter(b=>b.id!==id);}
-      msg("🔖 Bookmarked!");
-      return[...prev,{id,sn:s.n,sen:s.en,sar:s.ar,vn:v.numberInSurah,text:v.text}];
+      if(has){msg(L("تمت الإزالة","Removed"));return prev.filter(b=>b.id!==id);}
+      msg(L("تم الحفظ 🔖","Bookmarked 🔖"));
+      return[...prev,{id,sn:s.n,sen:s.en,sar:s.arShort,vn:v.numberInSurah}];
     });
   };
-  const hasBM=(v,s)=>bms.some(b=>b.id===`${s.n}:${v.numberInSurah}`);
 
-  const shareAyah=(v,s)=>{
+  const share=(v,s)=>{
     const ti=trans[v.numberInSurah-1]?.text||"";
-    const txt=`${v.text}\n\n"${ti}"\n\n— ${s.en} (${s.n}:${v.numberInSurah})`;
+    const txt=`${v.text}\n\n"${ti}"\n\n— ${s.arShort} (${s.n}:${v.numberInSurah})`;
     if(navigator.share)navigator.share({title:"القرآن الكريم",text:txt}).catch(()=>{});
-    else navigator.clipboard?.writeText(txt).then(()=>msg("Copied!")).catch(()=>{});
+    else navigator.clipboard?.writeText(txt).then(()=>msg(L("تم النسخ","Copied"))).catch(()=>{});
   };
 
   useEffect(()=>{
-    if(tab==="prayer"&&!pt){
-      fetch("https://api.aladhan.com/v1/timingsByCity?city=Mecca&country=SA&method=4")
-        .then(r=>r.json()).then(d=>{
-          const t=d.data?.timings;
-          if(t){
-            setPt(t);
-            const now=new Date(),nm=now.getHours()*60+now.getMinutes();
-            let f=null;
-            for(const p of["Fajr","Dhuhr","Asr","Maghrib","Isha"]){
-              const[h,m]=t[p].split(":").map(Number);
-              if(h*60+m>nm){f=p;break;}
-            }
-            setNextP(f||"Fajr");
+    fetch("https://api.aladhan.com/v1/timingsByCity?city=Dubai&country=AE&method=8")
+      .then(r=>r.json()).then(d=>{
+        const t=d.data?.timings;
+        if(t){
+          setPt(t);
+          const now=new Date(),nm=now.getHours()*60+now.getMinutes();
+          let f=null;
+          for(const p of["Fajr","Dhuhr","Asr","Maghrib","Isha"]){
+            const[h,m]=t[p].split(":").map(Number);
+            if(h*60+m>nm){f=p;break;}
           }
-        }).catch(()=>{setPt({Fajr:"05:12",Sunrise:"06:38",Dhuhr:"12:14",Asr:"15:38",Maghrib:"18:02",Isha:"19:32"});setNextP("Dhuhr");});
-    }
-  },[tab]);
+          setNextP(f||"Fajr");
+        }
+      }).catch(()=>{setPt({Fajr:"05:22",Sunrise:"06:35",Dhuhr:"12:33",Asr:"15:53",Maghrib:"18:26",Isha:"19:39"});setNextP("Asr");});
+  },[]);
 
   const getJuz=(sn)=>{let j=1;for(const x of JUZ){if(x.s<=sn)j=x.j;else break;}return j;}
-  const today=new Date().toLocaleDateString("en-US",{weekday:"long",year:"numeric",month:"long",day:"numeric"});
-  const fil=SURAHS.filter(s=>s.en.toLowerCase().includes(q.toLowerCase())||s.ar.includes(q)||String(s.n).includes(q));
+  const fil=SURAHS.filter(s=>s.en.toLowerCase().includes(q.toLowerCase())||s.arShort.includes(q)||String(s.n).includes(q));
   const nextSurah=surah&&surah.n<114?SURAHS[surah.n]:null;
+  const hijriDate=new Date().toLocaleDateString("ar-SA-u-ca-islamic",{day:"numeric",month:"long",year:"numeric"});
+  const weekdayAr=new Date().toLocaleDateString("ar-SA",{weekday:"long"});
+  const weekdayEn=new Date().toLocaleDateString("en",{weekday:"long"});
+  const todayEn=new Date().toLocaleDateString("en-CA");
+
+  // Athkar counter
+  const incrZikr=(catId,idx)=>{
+    const key=`${catId}-${idx}`;
+    setZikrCounts(prev=>{
+      const cur=(prev[key]||0)+1;
+      const max=ATHKAR_DATA[catId][idx].rep;
+      if(cur>=max) msg(L("✅ اكتمل الذكر","✅ Done!"));
+      return{...prev,[key]:cur>=max?0:cur};
+    });
+  };
+  const getCount=(catId,idx)=>zikrCounts[`${catId}-${idx}`]||0;
+
+  const getCatColor=(col)=>{
+    const map={morning:"var(--orange)",evening:"var(--blue)",sleep:"var(--purple)",prayer:"var(--green)",quran:"var(--gold)"};
+    return map[col]||"var(--gold)";
+  };
+  const getCatBg=(col)=>{
+    const map={morning:"var(--orangebg)",evening:"var(--bluebg)",sleep:"var(--purplebg)",prayer:"var(--greenbg)",quran:"var(--goldbg)"};
+    return map[col]||"var(--goldbg)";
+  };
+
+  const tabIsReader=tab==="reader";
+  const tabIsList=tab==="surahlist";
+  const tabIsAthkar=tab==="athkar";
 
   return(
     <div className="app">
 
-      {/* TOPBAR */}
+      {/* TOP BAR */}
       <div className="topbar">
-        <div className="topbar-inner">
-          <div className="tb-btn" onClick={()=>setDrawer(true)}>☰</div>
-          <div className="tb-mid">
-            <div className="tb-ar">
-              {tab==="reader"&&surah?surah.ar:tab==="prayer"?"أوقات الصلاة":tab==="bookmarks"?"المحفوظات":"القرآن الكريم"}
-            </div>
-            <div className="tb-en">
-              {tab==="reader"&&surah?surah.en:tab==="prayer"?"Prayer Times":tab==="bookmarks"?"Bookmarks":"The Holy Quran"}
-            </div>
-          </div>
-          <div className="tb-btn" onClick={()=>setDark(d=>!d)}>{dark?"☀️":"🌙"}</div>
+        <div style={{display:"flex",gap:6}}>
+          <div className="tb-ico" onClick={()=>setDrawer(true)}>⚙️</div>
+          <div className="tb-ico" onClick={()=>setTab("surahlist")}>🔍</div>
+          <div className="tb-ico" onClick={()=>setTab("bookmarks")}>🔖</div>
+        </div>
+        <div className="tb-title">
+          {tabIsReader&&surah?surah.arShort:tab==="prayer"?L("أوقات الصلاة","Prayer Times"):tab==="bookmarks"?L("المحفوظات","Bookmarks"):tabIsList?L("المصحف","Quran"):tabIsAthkar&&athCat?ATHKAR_CATS.find(c=>c.id===athCat)?.ar:tab==="athkar"?L("الأذكار","Athkar"):"القرآن الكريم"}
+        </div>
+        <div style={{display:"flex",gap:6}}>
+          {(tab==="athkar"&&athCat)&&<div className="tb-ico" onClick={()=>setAthCat(null)}>←</div>}
+          {tabIsReader&&<div className="tb-ico" onClick={()=>{stopAudio();setTab("surahlist");}}>←</div>}
+          <div className="tb-ico" onClick={()=>setDark(d=>!d)}>{dark?"☀️":"🌙"}</div>
         </div>
       </div>
 
-      {/* HOME */}
+      {/* ── HOME ── */}
       {tab==="home"&&(
         <div className="scroller su">
-          <div className="hero">
-            <div className="hero-deco"/>
-            <div className="hero-ornament">✦ بسم الله الرحمن الرحيم ✦</div>
-            <div className="hero-bism">{BISM}</div>
-            <div className="hero-bism-en">In the name of Allah, the Most Gracious, the Most Merciful</div>
-            <div className="hero-date">📅 {today}</div>
+          <div className="prayer-strip-wrap">
+            <div className="ps-city">{L("دبي، الإمارات","Dubai, UAE")}</div>
+            <div className="ps-row">
+              {pt&&(
+                <>
+                  <div className={`ps-pill${nextP==="Fajr"?" active":""}`}>
+                    <div className="ps-pname">{L(PNAMES_AR.Fajr,PNAMES_EN.Fajr)}</div>
+                    <div className="ps-ptime">{pt.Fajr}</div>
+                  </div>
+                  <div className={`ps-pill${nextP==="Dhuhr"?" active":""}`}>
+                    <div className="ps-pname">{L(PNAMES_AR.Dhuhr,PNAMES_EN.Dhuhr)}</div>
+                    <div className="ps-ptime">{pt.Dhuhr}</div>
+                  </div>
+                </>
+              )}
+              <div className="ps-center">
+                <div className="ps-hijri-day">{new Date().getDate()}</div>
+                <div className="ps-hijri-month">{hijriDate.split(" ")[1]||"رمضان"}</div>
+              </div>
+              {pt&&(
+                <>
+                  <div className={`ps-pill${nextP==="Asr"?" active":""}`}>
+                    <div className="ps-pname">{L(PNAMES_AR.Asr,PNAMES_EN.Asr)}</div>
+                    <div className="ps-ptime">{pt.Asr}</div>
+                  </div>
+                  <div className={`ps-pill${nextP==="Maghrib"?" active":""}`}>
+                    <div className="ps-pname">{L(PNAMES_AR.Maghrib,PNAMES_EN.Maghrib)}</div>
+                    <div className="ps-ptime">{pt.Maghrib}</div>
+                  </div>
+                </>
+              )}
+            </div>
           </div>
-          <div className="cards-grid">
-            {[
-              {ico:"📖",lbl:"اقرأ القرآن",g:true,fn:()=>setDrawer(true)},
-              {ico:"🕌",lbl:"أوقات الصلاة",g:false,fn:()=>setTab("prayer")},
-              {ico:"🔖",lbl:"المحفوظات",g:true,fn:()=>setTab("bookmarks")},
-              {ico:"⭐",lbl:"الكهف",g:false,fn:()=>openSurah(SURAHS[17])},
-            ].map(c=>(
-              <div key={c.lbl} className="hcard" onClick={c.fn}>
-                <div className={`hcard-ico ${c.g?"g":"y"}`}>{c.ico}</div>
-                <div className="hcard-lbl">{c.lbl}</div>
+          {nextP&&pt&&(
+            <div className="ps-cd-bar">
+              <div className="ps-cd-time" dir="ltr">{cd}</div>
+              <div className="ps-cd-lbl">{L(`${PNAMES_AR[nextP]} بعد`,`${PNAMES_EN[nextP]} in`)}</div>
+            </div>
+          )}
+          <div className="home-menu">
+            <div className="menu-row">
+              <div className="mcard wide" onClick={()=>setTab("surahlist")}>
+                <div className="mcard-ico">📖</div>
+                <div className="mcard-title">{L("المصحف","Quran")}</div>
+                <div className="mcard-sub">{L("114 سورة","114 Surahs")}</div>
+                <div className="mcard-num">1</div>
+              </div>
+              <div className="mcard" onClick={()=>setTab("athkar")}>
+                <div className="mcard-ico">🤲</div>
+                <div className="mcard-title">{L("الأذكار","Athkar")}</div>
+                <div className="mcard-sub">{L("5 أقسام","5 sections")}</div>
+                <div className="mcard-num">2</div>
+              </div>
+            </div>
+            <div className="menu-row">
+              <div className="mcard" onClick={()=>setTab("prayer")}>
+                <div className="mcard-ico">🕌</div>
+                <div className="mcard-title">{L("الصلاة","Prayer")}</div>
+                <div className="mcard-sub">{L("مواقيت","Times")}</div>
+                <div className="mcard-num">3</div>
+              </div>
+              <div className="mcard" onClick={()=>openSurah(SURAHS[17])}>
+                <div className="mcard-ico">⭐</div>
+                <div className="mcard-title">{L("الكهف","Al-Kahf")}</div>
+                <div className="mcard-sub">{L("سورة ١٨","Surah 18")}</div>
+                <div className="mcard-num">18</div>
+              </div>
+              <div className="mcard" onClick={()=>openSurah(SURAHS[35])}>
+                <div className="mcard-ico">✨</div>
+                <div className="mcard-title">{L("يس","Ya-Sin")}</div>
+                <div className="mcard-sub">{L("سورة ٣٦","S.36")}</div>
+                <div className="mcard-num">36</div>
+              </div>
+            </div>
+            <div className="menu-row">
+              <div className="mcard" onClick={()=>openSurah(SURAHS[66])}>
+                <div className="mcard-ico">🌙</div>
+                <div className="mcard-title">{L("الملك","Al-Mulk")}</div>
+                <div className="mcard-sub">{L("سورة ٦٧","S.67")}</div>
+                <div className="mcard-num">67</div>
+              </div>
+              <div className="mcard" onClick={()=>openSurah(SURAHS[54])}>
+                <div className="mcard-ico">💚</div>
+                <div className="mcard-title">{L("الرحمن","Ar-Rahman")}</div>
+                <div className="mcard-sub">{L("سورة ٥٥","S.55")}</div>
+                <div className="mcard-num">55</div>
+              </div>
+              <div className="mcard" onClick={()=>setTab("bookmarks")}>
+                <div className="mcard-ico">🔖</div>
+                <div className="mcard-title">{L("محفوظاتي","Saved")}</div>
+                <div className="mcard-sub">{bms.length} {L("آية","ayahs")}</div>
+                <div className="mcard-num">★</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ── ATHKAR HOME ── */}
+      {tab==="athkar"&&!athCat&&(
+        <div className="scroller su">
+          <div className="athkar-home">
+            <div className="ath-section-title">{L("اختر قسماً","Choose a section")}</div>
+            <div className="ath-grid">
+              {ATHKAR_CATS.map(c=>{
+                const items=ATHKAR_DATA[c.id]||[];
+                return(
+                  <div key={c.id} className={`ath-card ath-${c.col}`} onClick={()=>setAthCat(c.id)}>
+                    <div className="ath-card-ico">{c.ico}</div>
+                    <div className="ath-card-title">{isAr?c.ar:c.en}</div>
+                    <div className="ath-card-count">{items.length} {L("ذكر","adhkar")}</div>
+                    <div className="ath-card-bar" style={{background:`linear-gradient(90deg,${getCatColor(c.col)},${getCatColor(c.col)}88)`}}/>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ── ATHKAR READER ── */}
+      {tab==="athkar"&&athCat&&(()=>{
+        const cat=ATHKAR_CATS.find(c=>c.id===athCat);
+        const items=ATHKAR_DATA[athCat]||[];
+        const col=getCatColor(cat.col);
+        return(
+          <div className="ath-reader su">
+            <div className="ath-reader-scroll">
+              {items.map((z,i)=>{
+                const cnt=getCount(athCat,i);
+                const done=cnt>=z.rep&&z.rep>1;
+                return(
+                  <div key={i} className="zikr-card">
+                    <div className="zikr-card-bar" style={{background:col}}/>
+                    <div className="zikr-num">{i+1}</div>
+                    <div className="zikr-ar" style={{fontSize:`${fs}px`}}>{z.ar}</div>
+                    {z.tr&&<div className="zikr-tr">{z.tr}</div>}
+                    <div className="zikr-source">{z.source}</div>
+                    <div className="zikr-footer">
+                      <div className="zikr-count-row">
+                        {z.rep>1&&(
+                          <>
+                            <div className="zikr-rep">{L(`يُكرر ${z.rep} مرة`,`×${z.rep}`)}</div>
+                            <div
+                              className="zikr-counter"
+                              style={{background:col}}
+                              onClick={()=>incrZikr(athCat,i)}
+                            >{cnt}</div>
+                          </>
+                        )}
+                      </div>
+                      {(done||(z.rep===1))&&<div className="zikr-done">✓ {L("تم","Done")}</div>}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        );
+      })()}
+
+      {/* ── SURAH LIST ── */}
+      {tab==="surahlist"&&(
+        <>
+          <div className="list-topbar">
+            <div className="ltabs">
+              {[{id:"surahs",ar:"السور",en:"Surahs"},{id:"juz",ar:"الأجزاء",en:"Juz"}].map(t=>(
+                <div key={t.id} className={`ltab${surahTab===t.id?" on":""}`} onClick={()=>setSurahTab(t.id)}>{L(t.ar,t.en)}</div>
+              ))}
+            </div>
+            <div className="lsearch">
+              <span style={{fontSize:13,color:"var(--ink4)"}}>🔍</span>
+              <input placeholder={L("بحث...","Search...")} value={q} onChange={e=>setQ(e.target.value)}/>
+            </div>
+          </div>
+          <div className="scroller su">
+            {surahTab==="surahs"&&(
+              <div className="surah-grid">
+                {fil.map(s=>(
+                  <div key={s.n} className="sgcard" onClick={()=>openSurah(s)}>
+                    <div className="sgcard-num">{s.n}</div>
+                    <div className="sgcard-ar">{s.ar}</div>
+                    <div className="sgcard-meta">{L(s.tar,s.ten)}، {L("آياتها:","Ayahs:")} {s.v}</div>
+                    <div className="sgcard-page">{L("الصفحة","Page")} {s.pg}</div>
+                  </div>
+                ))}
+              </div>
+            )}
+            {surahTab==="juz"&&(
+              <div className="juz-list">
+                {JUZ.map(j=>{
+                  const s=SURAHS[j.s-1];
+                  return(
+                    <div key={j.j} className="juz-card" onClick={()=>{setCurJuz(j.j);openSurah(s);}}>
+                      <div className="juz-ball">{j.j}</div>
+                      <div className="juz-info">
+                        <div className="juz-title">{L(`الجزء ${j.j}`,`Juz ${j.j}`)}</div>
+                        <div className="juz-sub">{L(s.arShort,s.en)}</div>
+                      </div>
+                      <div className="juz-arr">←</div>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+          </div>
+        </>
+      )}
+
+      {/* ── READER ── */}
+      {tab==="reader"&&surah&&(
+        <div className="reader-wrap su">
+          <div className="rnav">
+            <div className="rchip green">{surah.arShort}</div>
+            <div className="rsep"/>
+            <div className="rchip gold">{L(`الجزء ${getJuz(surah.n)}`,`Juz ${getJuz(surah.n)}`)}</div>
+            <div className="rsep"/>
+            <div className="rchip" onClick={()=>setShowTrans(s=>!s)}>{showTrans?L("إخفاء","Hide"):L("ترجمة","Translation")}</div>
+            <div style={{marginRight:"auto",fontSize:11,color:"var(--ink4)",flexShrink:0,fontWeight:700,fontFamily:"var(--en)"}}>{surah.v}</div>
+          </div>
+          {/* Sheikh selector */}
+          <div className="sheikh-strip">
+            <span style={{fontSize:11,color:"var(--ink4)",flexShrink:0,fontFamily:"var(--ui)",fontWeight:700}}>{L("القارئ:","Sheikh:")}</span>
+            {SHEIKHS.map((sh,i)=>(
+              <div key={sh.id} className={`sheikh-btn${sheikhIdx===i?" on":""}`}
+                onClick={()=>{setSheikhIdx(i);if(playV!==null){stopAudio();msg(L(`تم التغيير إلى ${sh.ar}`,`Switched to ${sh.en}`));}}}>
+                {isAr?sh.ar:sh.en}
               </div>
             ))}
           </div>
-          <div className="sec-hd">
-            <div className="sec-title">جزء عم — السور القصيرة</div>
-            <div className="sec-link" onClick={()=>setDrawer(true)}>كل السور ←</div>
-          </div>
-          {SURAHS.slice(77).map(s=>(
-            <div key={s.n} className="srow" onClick={()=>openSurah(s)}>
-              <div className="snum">{s.n}</div>
-              <div className="sinfo">
-                <div className="sen">{s.en}</div>
-                <div className="smeta">{s.v} verses · {s.t}</div>
-              </div>
-              <div className="sar">{s.ar}</div>
-            </div>
-          ))}
-        </div>
-      )}
-
-      {/* SURAH LIST */}
-      {tab==="list"&&(
-        <div className="scroller su">
-          <div className="search-wrap">
-            <div className="search-box">
-              <span>🔍</span>
-              <input placeholder="ابحث عن سورة..." value={q} onChange={e=>setQ(e.target.value)}/>
-            </div>
-          </div>
-          {fil.map(s=>(
-            <div key={s.n} className="srow" onClick={()=>openSurah(s)}>
-              <div className="snum">{s.n}</div>
-              <div className="sinfo">
-                <div className="sen">{s.en}</div>
-                <div className="smeta">{s.v} آية · {s.t}</div>
-              </div>
-              <div className="sar">{s.ar}</div>
-            </div>
-          ))}
-        </div>
-      )}
-
-      {/* READER */}
-      {tab==="reader"&&surah&&(
-        <div className="reader-wrap su">
-          {/* NAV */}
-          <div className="rnav">
-            <div className="rchip active">{surah.ar}</div>
-            <div className="rsep"/>
-            <div className="rchip gold" onClick={()=>setDrawer(true)}>الجزء {getJuz(surah.n)}</div>
-            <div className="rsep"/>
-            <div className="rchip" onClick={()=>setShowTrans(s=>!s)}>{showTrans?"إخفاء الترجمة":"الترجمة"}</div>
-            <div style={{marginLeft:"auto",fontSize:11,color:"var(--ink4)",flexShrink:0,fontWeight:700,fontFamily:"var(--en)"}}>{surah.v}</div>
-          </div>
-          {/* TOOLBAR */}
           <div className="rtool">
-            <div className={`rtbtn${autoScroll?" on":""}`} title="تمرير تلقائي" onClick={()=>setAutoScroll(s=>!s)}>📜</div>
-            <div className="rtbtn" onClick={()=>{if(selV){const v=verses.find(x=>x.numberInSurah===selV);if(v)toggleBM(v,surah);}else msg("اضغط على آية أولاً");}}>🔖</div>
-            <div className="rtbtn" onClick={()=>{if(selV){const v=verses.find(x=>x.numberInSurah===selV);if(v)shareAyah(v,surah);}else msg("اضغط على آية أولاً");}}>📤</div>
+            <div className={`rtbtn${autoScroll?" on":""}`} onClick={()=>setAutoScroll(s=>!s)}>📜</div>
+            <div className="rtbtn" onClick={()=>{if(selV){const v=verses.find(x=>x.numberInSurah===selV);if(v)toggleBM(v,surah);}else msg(L("اضغط على آية","Tap an ayah"))}}>🔖</div>
+            <div className="rtbtn" onClick={()=>{if(selV){const v=verses.find(x=>x.numberInSurah===selV);if(v)share(v,surah);}else msg(L("اضغط على آية","Tap an ayah"))}}>📤</div>
             <div className="rtbtn" onClick={()=>{if(verses[0])playAyah(verses[0].numberInSurah,verses[0].number,verses);}}>▶</div>
             <div className="fcg">
               <div className="fcbtn" onClick={()=>setFs(f=>Math.max(18,f-2))}>A−</div>
               <div className="fcval">{fs}</div>
-              <div className="fcbtn" onClick={()=>setFs(f=>Math.min(40,f+2))}>A+</div>
+              <div className="fcbtn" onClick={()=>setFs(f=>Math.min(42,f+2))}>A+</div>
             </div>
           </div>
-          {/* PAGE */}
           <div className="mpage" ref={pageRef}>
             <div className="mhdr">
+              <div className="mhdr-glow"/>
               <div className="mhdr-ar">{surah.ar}</div>
               <div className="mhdr-en">{surah.en}</div>
               <div className="mhdr-pills">
-                <span className="mpill">{surah.v} Ayahs</span>
-                <span className="mpill">{surah.t}</span>
-                <span className="mpill gold">Juz {getJuz(surah.n)}</span>
+                <span className="mpill">{surah.v} {L("آية","Ayahs")}</span>
+                <span className="mpill">{L(surah.tar,surah.ten)}</span>
+                <span className="mpill gold">{L(`الجزء ${getJuz(surah.n)}`,`Juz ${getJuz(surah.n)}`)}</span>
+                <span className="mpill">{L("ص","P.")}{surah.pg}</span>
               </div>
-              <div className="mhdr-wave"/>
             </div>
-            {surah.n!==1&&surah.n!==9&&(
-              <div className="bism-wrap"><div className="bism-ar">{BISM}</div></div>
-            )}
+            {surah.n!==1&&surah.n!==9&&(<div className="bism-blk"><div className="bism-ar">{BISM}</div></div>)}
             {loading?(
-              <div className="loading"><div className="spin">🌙</div>جاري التحميل...</div>
+              <div className="loading"><div className="spin">🌙</div>{L("جاري التحميل...","Loading...")}</div>
             ):(
               <>
                 <div className="ayah-body" style={{fontSize:`${fs}px`}}>
-                  {verses.map((v,i)=>(
-                    <span
-                      key={v.number}
+                  {verses.map(v=>(
+                    <span key={v.number}
                       ref={el=>{if(el)ayRefs.current[v.numberInSurah]=el;}}
                       className={`aspan${playV===v.numberInSurah?" play":""}${selV===v.numberInSurah?" sel":""}`}
-                      onClick={()=>setSelV(p=>p===v.numberInSurah?null:v.numberInSurah)}
-                    >
+                      onClick={()=>setSelV(p=>p===v.numberInSurah?null:v.numberInSurah)}>
                       {v.text}{" "}
-                      <span
-                        className={`anum${playV===v.numberInSurah?" playing":""}`}
-                        onClick={e=>{e.stopPropagation();playAyah(v.numberInSurah,v.number,verses);}}
-                      >{v.numberInSurah}</span>{" "}
+                      <span className={`anum${playV===v.numberInSurah?" playing":""}`}
+                        onClick={e=>{e.stopPropagation();playAyah(v.numberInSurah,v.number,verses);}}>
+                        {v.numberInSurah}
+                      </span>{" "}
                     </span>
                   ))}
                 </div>
-                {nextSurah&&!loading&&verses.length>0&&(
-                  <div className="next-surah-banner" onClick={()=>openSurah(nextSurah)}>
-                    <div className="nsb-ico">📖</div>
-                    <div className="nsb-info">
-                      <div className="nsb-label">Next Surah</div>
-                      <div className="nsb-name-ar">{nextSurah.ar}</div>
-                      <div className="nsb-name-en">{nextSurah.en} · {nextSurah.v} verses</div>
+                {nextSurah&&verses.length>0&&(
+                  <div className="next-banner" onClick={()=>openSurah(nextSurah)}>
+                    <div className="nb-arr">→</div>
+                    <div className="nb-info">
+                      <div className="nb-lbl">{L("السورة التالية","Next Surah")}</div>
+                      <div className="nb-ar">{nextSurah.ar}</div>
+                      <div className="nb-en">{nextSurah.en} · {nextSurah.v} {L("آية","verses")}</div>
                     </div>
-                    <div className="nsb-arrow">←</div>
+                    <div className="nb-ico">📖</div>
                   </div>
                 )}
               </>
             )}
           </div>
-          {/* TRANSLATION */}
           <div className={`trans-panel${showTrans?" open":""}`}>
             <div className="trans-inner">
               <div className="trans-hd">
-                <div className="trans-hd-lbl">✦ Sahih International</div>
+                <div className="trans-lbl">✦ Sahih International</div>
                 <div className="trans-x" onClick={()=>setShowTrans(false)}>✕</div>
               </div>
               {trans.map((t,i)=>(
@@ -945,13 +1052,12 @@ function App(){
               ))}
             </div>
           </div>
-          {/* AUDIO BAR */}
-          {(playV!==null||playing)&&(
+          {playV!==null&&(
             <div className="abar">
               <div className="aplay" onClick={togglePlay}>{playing?"⏸":"▶"}</div>
               <div className="ainfo">
-                <div className="atitle">الآية {playV} · الشيخ الحصري</div>
-                <div className="asub">{surah.en} · Auto-continue {autoScroll?"ON":"OFF"}</div>
+                <div className="atitle">{L(`الآية ${playV} · ${SHEIKHS[sheikhIdx].ar}`,`Ayah ${playV} · ${SHEIKHS[sheikhIdx].en}`)}</div>
+                <div className="asub">{surah.en} · Auto {autoScroll?"ON":"OFF"}</div>
                 <div className="aprog"><div className="afill" style={{width:`${prog}%`}}/></div>
               </div>
               <div className="astop" onClick={stopAudio}>⏹</div>
@@ -960,86 +1066,84 @@ function App(){
         </div>
       )}
 
-      {/* PRAYER */}
+      {/* ── PRAYER ── */}
       {tab==="prayer"&&(
-        <div className="scroller su">
-          <div className="phero">
-            <div className="pcity">🕌 مكة المكرمة</div>
-            <div className="pdate">{today}</div>
+        <div className="prayer-wrap su">
+          <div className="pcity-row">{L("دبي، الإمارات","Dubai, UAE")}</div>
+          <div className="pdate-row">
+            <div className="pdate-card">
+              <div className="pdate-ar" dir="rtl">{weekdayAr} · {hijriDate.split(" ").slice(0,2).join(" ")}</div>
+            </div>
+            <div className="pdate-card">
+              <div className="pdate-en">{weekdayEn}</div>
+              <div className="pdate-en" style={{fontSize:11,color:"var(--ink4)",marginTop:2}}>{todayEn}</div>
+            </div>
           </div>
           {nextP&&pt&&(
             <div className="pnext">
-              <div className="pnext-lbl">✦ الصلاة القادمة ✦</div>
-              <div className="pnext-name">{PICO[nextP]} {nextP}</div>
-              <div className="pnext-time">{pt[nextP]}</div>
+              <div className="pnext-lbl">{L(`${PNAMES_AR[nextP]} بعد`,`${PNAMES_EN[nextP]} in`)}</div>
+              <div className="pnext-cd" dir="ltr">{cd}</div>
             </div>
           )}
-          <div className="plist">
-            {!pt?<div className="loading"><div className="spin">🌙</div></div>:
-              PRAYERS.map(p=>(
-                <div key={p} className={`prow${nextP===p?" now":""}`}>
-                  <span className="pico">{PICO[p]||"🕐"}</span>
-                  <span className="pname">{p}</span>
-                  <span className="ptime">{pt[p]}</span>
-                  {nextP===p&&<span className="pbadge">NEXT</span>}
-                </div>
-              ))
-            }
+          <div className="pgrid">
+            {pt&&PRAYERS_MAIN.map(p=>(
+              <div key={p} className={`pcard${nextP===p?" now":""}`}>
+                <div className="pcard-name">{PICO[p]} {L(PNAMES_AR[p],PNAMES_EN[p])}</div>
+                <div className="pcard-time" dir="ltr">{pt[p]?.split(":").slice(0,2).join(":")}</div>
+                <div className="pcard-ampm">{L(parseInt(pt[p])>=12?"م":"ص",parseInt(pt[p])>=12?"PM":"AM")}</div>
+              </div>
+            ))}
           </div>
         </div>
       )}
 
-      {/* BOOKMARKS */}
+      {/* ── BOOKMARKS ── */}
       {tab==="bookmarks"&&(
-        <div className="scroller su">
+        <div className="bm-wrap su">
           <div className="bmhero">
-            <div className="bmhero-title">المحفوظات</div>
-            <div className="bmhero-sub">{bms.length} آيات محفوظة</div>
+            <div className="bmhero-title">{L("المحفوظات","Bookmarks")}</div>
+            <div className="bmhero-sub">{bms.length} {L("آيات محفوظة","saved ayahs")}</div>
           </div>
           {bms.length===0?(
             <div className="empty">
               <div className="empty-ico">🔖</div>
-              <div className="empty-txt">لا توجد محفوظات بعد.<br/>افتح سورة · اضغط على آية · ثم 🔖</div>
+              <div className="empty-txt">{L("لا توجد محفوظات\nافتح سورة → اضغط على آية → 🔖","No bookmarks yet\nOpen a surah → tap an ayah → 🔖")}</div>
             </div>
           ):bms.map(b=>(
             <div key={b.id} className="bmrow" onClick={()=>openSurah(SURAHS[b.sn-1])}>
               <div className="bmico">🔖</div>
               <div className="bmi">
-                <div className="bmtitle">{b.sar} · آية {b.vn}</div>
-                <div className="bmsub">{b.sen} · Surah {b.sn}</div>
+                <div className="bmtitle">{b.sar} · {L("آية","Ayah")} {b.vn}</div>
+                <div className="bmsub">{b.sen} · {L("سورة","Surah")} {b.sn}</div>
               </div>
-              <div className="bmar">{b.sar}</div>
             </div>
           ))}
         </div>
       )}
 
-      {/* BOTTOM NAV */}
+      {/* ── BOTTOM NAV ── */}
       <div className="bnav">
         {[
-          {id:"home",ico:"🏠",lbl:"الرئيسية"},
-          {id:"list",ico:"📋",lbl:"السور"},
-          {id:"prayer",ico:"🕌",lbl:"الصلاة"},
-          {id:"bookmarks",ico:"🔖",lbl:"المحفوظات"},
+          {id:"home",   ico:"🏠", ar:"الرئيسية",  en:"Home"},
+          {id:"surahlist",ico:"📖",ar:"المصحف",    en:"Quran"},
+          {id:"athkar", ico:"🤲", ar:"الأذكار",    en:"Athkar"},
+          {id:"prayer", ico:"🕌", ar:"الصلاة",     en:"Prayer"},
+          {id:"bookmarks",ico:"🔖",ar:"المحفوظات", en:"Saved"},
         ].map(n=>(
           <div key={n.id}
-            className={`bnitem${(tab===n.id||(tab==="reader"&&n.id==="list"))?" on":""}`}
-            onClick={()=>{
-              if(n.id==="list"&&tab==="reader"){setTab("list");}
-              else if(n.id==="list"){setTab("list");}
-              else{stopAudio();setTab(n.id);}
-            }}>
+            className={`bnitem${(tab===n.id||(tab==="reader"&&n.id==="surahlist"))?" on":""}`}
+            onClick={()=>{stopAudio();setTab(n.id);}}>
             <span className="bnico">{n.ico}</span>
-            <span className="bnlbl">{n.lbl}</span>
+            <span className="bnlbl">{L(n.ar,n.en)}</span>
           </div>
         ))}
       </div>
 
-      {/* DRAWER */}
+      {/* ── DRAWER ── */}
       {drawer&&<div className="overlay" onClick={()=>setDrawer(false)}/>}
       <div className={`drawer${drawer?" open":""}`}>
         <div className="dhead">
-          <div className="dhead-text">
+          <div>
             <div className="dh-ar">القرآن الكريم</div>
             <div className="dh-en">The Holy Quran</div>
           </div>
@@ -1047,55 +1151,38 @@ function App(){
         </div>
         <div className="dbody">
           <div className="dsec">
-            <div className="dsec-title">الإعدادات · Settings</div>
+            <div className="dsec-t">Settings · الإعدادات</div>
             {[
-              {lbl:"🌙 الوضع الليلي",on:dark,fn:()=>setDark(d=>!d)},
-              {lbl:"📜 التمرير التلقائي",on:autoScroll,fn:()=>setAutoScroll(s=>!s)},
-              {lbl:"📖 الترجمة الإنجليزية",on:showTrans,fn:()=>setShowTrans(s=>!s)},
+              {ar:"🌙 الوضع الليلي",en:"🌙 Night Mode",on:dark,fn:()=>setDark(d=>!d)},
+              {ar:"🌐 التبديل للإنجليزية",en:"🌐 Switch to Arabic",on:!isAr,fn:()=>setIsAr(a=>!a)},
+              {ar:"📜 التمرير التلقائي",en:"📜 Auto-Scroll",on:autoScroll,fn:()=>setAutoScroll(s=>!s)},
+              {ar:"📖 عرض الترجمة",en:"📖 Show Translation",on:showTrans,fn:()=>setShowTrans(s=>!s)},
             ].map(r=>(
-              <div key={r.lbl} className="trow">
-                <span className="trow-lbl">{r.lbl}</span>
+              <div key={r.ar} className="trow">
+                <span className="trow-lbl">{L(r.ar,r.en)}</span>
                 <Tog on={r.on} fn={r.fn}/>
               </div>
             ))}
             <div className="trow">
-              <span className="trow-lbl">🔤 حجم الخط</span>
+              <span className="trow-lbl">{L("🔤 حجم الخط","🔤 Font Size")}</span>
               <div style={{display:"flex",alignItems:"center",gap:8}}>
                 <div className="fcbtn" onClick={()=>setFs(f=>Math.max(18,f-2))}>−</div>
                 <span style={{fontSize:13,color:"var(--ink2)",minWidth:22,textAlign:"center",fontWeight:700,fontFamily:"var(--en)"}}>{fs}</span>
-                <div className="fcbtn" onClick={()=>setFs(f=>Math.min(40,f+2))}>+</div>
+                <div className="fcbtn" onClick={()=>setFs(f=>Math.min(42,f+2))}>+</div>
               </div>
             </div>
           </div>
           <div className="dsec">
-            <div className="dsec-title">التنقل بالأجزاء · Navigate by Juz</div>
-            <div className="jgrid">
-              {JUZ.map(j=>(
-                <div key={j.j} className={`jbtn${curJuz===j.j?" on":""}`}
-                  onClick={()=>{setCurJuz(j.j);openSurah(SURAHS[j.s-1]);setDrawer(false);}}>
-                  <div className="jn">{j.j}</div>
-                  <div className="js">س.{j.s}</div>
-                </div>
-              ))}
-            </div>
-          </div>
-          <div className="dsec">
-            <div className="dsec-title">كل السور · All 114 Surahs</div>
-            <div className="search-wrap" style={{padding:"0 0 10px"}}>
-              <div className="search-box">
-                <span>🔍</span>
-                <input placeholder="ابحث..." value={q} onChange={e=>setQ(e.target.value)}/>
-              </div>
-            </div>
-            <div className="slwrap">
-              {fil.map(s=>(
-                <div key={s.n} className="slrow" onClick={()=>{openSurah(s);setDrawer(false);}}>
-                  <div className="slnum">{s.n}</div>
-                  <div className="sli">
-                    <div className="sle">{s.en}</div>
-                    <div className="slm">{s.v}v · {s.t}</div>
+            <div className="dsec-t">Sheikh · القارئ</div>
+            <div className="sheikh-grid">
+              {SHEIKHS.map((sh,i)=>(
+                <div key={sh.id} className={`sheikh-radio${sheikhIdx===i?" on":""}`}
+                  onClick={()=>{setSheikhIdx(i);if(playV!==null){stopAudio();msg(L(`تم التغيير إلى ${sh.ar}`,`Switched to ${sh.en}`));}}}>
+                  <div style={{display:"flex",alignItems:"center",justifyContent:"space-between",marginBottom:2}}>
+                    <div className="sheikh-radio-dot"/>
+                    <div className="sheikh-radio-name">{isAr?sh.ar:sh.en}</div>
                   </div>
-                  <div className="sla">{s.ar}</div>
+                  <div className="sheikh-radio-en" style={{textAlign:"right"}}>{sh.en}</div>
                 </div>
               ))}
             </div>

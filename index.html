@@ -38,11 +38,13 @@ body{font-family:var(--ui);color:var(--ink);direction:rtl}
 .scroll{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch}.scroll::-webkit-scrollbar{width:0}
 
 /* ── TOPBAR ── */
-.topbar{flex-shrink:0;z-index:60;background:var(--card);border-bottom:1px solid var(--bdr);padding:8px 12px;display:flex;align-items:center;justify-content:space-between;gap:8px}
-.tb-g{display:flex;gap:6px;align-items:center}
-.tb-ico{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--bg2);border:1px solid var(--bdr);cursor:pointer;font-size:15px;transition:all 0.15s;flex-shrink:0}
-.tb-ico:active{transform:scale(0.9)}
-.tb-title{font-family:var(--ar);font-size:19px;font-weight:700;color:var(--ink);text-align:center;flex:1}
+.topbar{flex-shrink:0;z-index:60;background:var(--card);border-bottom:1px solid var(--bdr);padding:0 12px;height:52px;display:flex;align-items:center;justify-content:space-between;gap:8px}
+.tb-g{display:flex;gap:5px;align-items:center}
+.tb-ico{width:34px;height:34px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:var(--bg2);border:1px solid var(--bdr);cursor:pointer;font-size:15px;transition:all 0.15s;flex-shrink:0}
+.tb-ico:active{transform:scale(0.88);background:var(--bg3)}
+.tb-center{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.tb-title{font-family:var(--ar);font-size:17px;font-weight:700;color:var(--ink);text-align:center;line-height:1.2}
+.tb-sub{font-size:11px;color:var(--gold);text-align:center;font-family:var(--ar);margin-top:1px;opacity:0.75}
 
 /* ── HOME ── */
 .home-prayer{overflow:hidden;background:linear-gradient(180deg,#9ad8e8 0%,#c4eef4 40%,#e0f4f6 65%,var(--bg2) 100%);padding:12px 12px 0}
@@ -62,13 +64,11 @@ body{font-family:var(--ui);color:var(--ink);direction:rtl}
 .hpc-month{font-family:var(--ar);font-size:11px;color:var(--gold2);font-weight:600}
 
 /* Countdown + fast duration row */
-.home-info-bar{background:var(--card);border-bottom:1px solid var(--bdr);padding:0;display:flex;align-items:stretch}
-.hib-next{flex:1;padding:9px 12px;display:flex;align-items:center;gap:8px;border-left:1px solid var(--bdr)}
-.hib-fast{flex:1;padding:9px 12px;display:flex;align-items:center;gap:6px}
-.hib-label{font-family:var(--ui);font-size:12px;font-weight:700;color:var(--blue);line-height:1.2}
-.hib-next-name{font-family:var(--ui);font-size:13px;font-weight:900;color:var(--blue)}
-.hib-time{font-family:var(--en);font-size:16px;font-weight:900;color:var(--blue);direction:ltr;letter-spacing:0.5px}
-.hib-fast-ico{font-size:18px;flex-shrink:0}
+.home-info-bar{background:var(--card);border-bottom:1px solid var(--bdr);padding:10px 16px;display:flex;align-items:center;justify-content:space-between;direction:rtl;gap:10px}
+.hib-prayer-name{font-family:var(--ui);font-size:15px;font-weight:900;color:var(--blue)}
+.hib-label{font-family:var(--ui);font-size:12px;font-weight:700;color:var(--ink3)}
+.hib-time{font-family:var(--en);font-size:22px;font-weight:900;color:var(--blue);direction:ltr;letter-spacing:1px;flex:1;text-align:center}
+.hib-fast-ico{font-size:16px;flex-shrink:0}
 .hib-fast-text{font-family:var(--ui);font-size:11px;font-weight:700;color:var(--orange);line-height:1.35}
 
 /* Rotating dua bar */
@@ -362,9 +362,17 @@ body{font-family:var(--ui);color:var(--ink);direction:rtl}
 .aab-stop{font-size:16px;cursor:pointer;color:var(--ink3);flex-shrink:0}
 
 /* Islamic background images section */
-.home-bg-strip{position:relative;overflow:hidden;height:110px;flex-shrink:0;background:linear-gradient(135deg,#1a0a30,#2a1050 40%,#1a3060)}
-.home-bg-strip img{width:100%;height:100%;object-fit:cover;opacity:0.55;display:block}
-.dark .home-bg-strip img{opacity:0.28}
+.home-bg-strip{position:relative;overflow:hidden;height:100px;flex-shrink:0;background:linear-gradient(135deg,#0e0520 0%,#1a0838 35%,#0d1c40 70%,#080c20 100%)}
+.hbs-inner{position:absolute;inset:0;display:flex;align-items:center;justify-content:space-between;padding:0 18px}
+.hbs-arch{display:flex;flex-direction:column;align-items:center;gap:2px;opacity:0.6}
+.hbs-dome{width:36px;height:20px;border-radius:50% 50% 0 0;background:rgba(200,160,60,0.5);border:1px solid rgba(200,160,60,0.4)}
+.hbs-minarets{display:flex;gap:4px;align-items:flex-end}
+.hbs-minaret{width:5px;height:22px;background:rgba(200,160,60,0.45);border-radius:3px 3px 0 0}
+.hbs-minaret-tall{height:30px;width:6px}
+.hbs-stars{flex:1;display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:4px;padding:0 12px;color:rgba(200,160,60,0.7);font-size:9px;line-height:1.8}
+.hbs-text{text-align:center;opacity:0.8}
+.hbs-arabic{font-family:var(--ar);font-size:22px;font-weight:700;color:rgba(220,180,80,0.9);line-height:1.4}
+.hbs-sub{font-family:var(--ar);font-size:11px;color:rgba(200,160,60,0.6)}
 .home-bg-strip-overlay{position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,var(--bg2) 100%)}
 
 /* MISC */
@@ -651,25 +659,6 @@ function useCountdown(t) {
 function AthkarReader({cat, items, fs, isAr, counts, onIncr}) {
   const L = (ar, en) => isAr ? ar : en;
 
-  // Athkar audio - short recitations from EveryAyah
-  const ATH_AUDIO_SHEIKHS = [
-    {id:"afasy",  ar:"العفاسي",  url:"https://cdn.islamic.network/quran/audio/128/ar.alafasy"},
-    {id:"husary", ar:"الحصري",   url:"https://cdn.islamic.network/quran/audio/128/ar.husary"},
-  ];
-
-  const stopAthAud = () => {
-    if (athAud) { try { athAud.pause(); athAud.src = ""; } catch(e){} }
-    setAthAud(null); setAthPlayCat(null);
-  };
-
-  // Prayer reminder setup
-  const setupReminders = (pt) => {
-    if (!("Notification" in window)) return;
-    Notification.requestPermission().then(perm => {
-      if (perm === "granted") msg(L("تم تفعيل التنبيهات","Reminders enabled"));
-      else msg(L("يرجى السماح بالتنبيهات","Please allow notifications"));
-    });
-  };
   const colMap = {morning:"#b87010",evening:"#1a50a0",sleep:"#5040a0",prayer:"#1a7048",quran:"#a07830",ramadan:"#7030a0"};
   const col = colMap[cat] || "#a07830";
   return (
@@ -707,25 +696,6 @@ function AthkarReader({cat, items, fs, isAr, counts, onIncr}) {
 function RamadanPage({pt, isAr, tDone, setTDone, kDone, setKDone}) {
   const L = (ar, en) => isAr ? ar : en;
 
-  // Athkar audio - short recitations from EveryAyah
-  const ATH_AUDIO_SHEIKHS = [
-    {id:"afasy",  ar:"العفاسي",  url:"https://cdn.islamic.network/quran/audio/128/ar.alafasy"},
-    {id:"husary", ar:"الحصري",   url:"https://cdn.islamic.network/quran/audio/128/ar.husary"},
-  ];
-
-  const stopAthAud = () => {
-    if (athAud) { try { athAud.pause(); athAud.src = ""; } catch(e){} }
-    setAthAud(null); setAthPlayCat(null);
-  };
-
-  // Prayer reminder setup
-  const setupReminders = (pt) => {
-    if (!("Notification" in window)) return;
-    Notification.requestPermission().then(perm => {
-      if (perm === "granted") msg(L("تم تفعيل التنبيهات","Reminders enabled"));
-      else msg(L("يرجى السماح بالتنبيهات","Please allow notifications"));
-    });
-  };
   const fajr = (pt && pt.Fajr) ? pt.Fajr : "05:22";
   const maghrib = (pt && pt.Maghrib) ? pt.Maghrib : "18:26";
   const isha = (pt && pt.Isha) ? pt.Isha : "19:39";
@@ -863,15 +833,6 @@ function App() {
 
   const msg = (t) => { setToast(t); setTimeout(() => setToast(null), 2200); };
 
-  // Fast duration calc for home bar
-  const getFastInfo = () => {
-    if (!pt) return null;
-    const fp = pt.Fajr.split(":").map(Number);
-    const mp = pt.Maghrib.split(":").map(Number);
-    const fastMins = (mp[0] * 60 + mp[1]) - (fp[0] * 60 + fp[1]);
-    return Math.floor(fastMins / 60) + "h " + (fastMins % 60) + "m";
-  };
-
   const openSurah = async (s) => {
     setSurah(s); setTab("reader"); setVerses([]); setTrans([]);
     setLoading(true); stopAudio(); setSelV(null);
@@ -988,7 +949,6 @@ function App() {
     });
   };
 
-  const fastInfo = getFastInfo();
   const curDua = ROTATING_DUAS[duaIdx];
 
   const NAV = [
@@ -1025,7 +985,10 @@ function App() {
           <div className="tb-ico" onClick={() => setTab("surahlist")}>🔍</div>
           <div className="tb-ico" onClick={() => setTab("bookmarks")}>🔖</div>
         </div>
-        <div className="tb-title">{pageTitle()}</div>
+        <div className="tb-center">
+          <div className="tb-title">{pageTitle()}</div>
+          {tab==="home" && <div className="tb-sub">بِسْمِ اللَّهِ</div>}
+        </div>
         <div className="tb-g">
           {showBack && <div className="tb-ico" onClick={goBack}>←</div>}
           <div className="tb-ico" onClick={() => setDark(d => !d)}>{dark ? "☀️" : "🌙"}</div>
@@ -1037,7 +1000,7 @@ function App() {
         <div className="scroll su">
           {/* Prayer strip */}
           <div className="home-prayer">
-            <div className="hp-city">{L("دبي، الإمارات","Dubai, UAE")}</div>
+            <div className="hp-city">{L("دبي، الإمارات 🌤","Dubai, UAE 🌤")}</div>
             <div className="hp-row">
               {pt && <div className={"hp-pill"+(nextP==="Fajr"?" act":"")}><div className="hpp-name">{L(PNAMES_AR.Fajr,PNAMES_EN.Fajr)}</div><div className="hpp-time" dir="ltr">{pt.Fajr}</div></div>}
               {pt && <div className={"hp-pill"+(nextP==="Dhuhr"?" act":"")}><div className="hpp-name">{L(PNAMES_AR.Dhuhr,PNAMES_EN.Dhuhr)}</div><div className="hpp-time" dir="ltr">{pt.Dhuhr}</div></div>}
@@ -1046,35 +1009,38 @@ function App() {
               {pt && <div className={"hp-pill"+(nextP==="Maghrib"?" act":"")}><div className="hpp-name">{L(PNAMES_AR.Maghrib,PNAMES_EN.Maghrib)}</div><div className="hpp-time" dir="ltr">{pt.Maghrib}</div></div>}
             </div>
           </div>
-          {/* Countdown + Fast duration */}
+          {/* Countdown bar - full width */}
           {pt && nextP && (
             <div className="home-info-bar">
-              <div className="hib-next">
-                <div>
-                  <div className="hib-next-name">{L(PNAMES_AR[nextP],PNAMES_EN[nextP])}</div>
-                  <div className="hib-label">{L("بعد","in")}</div>
-                </div>
-                <div className="hib-time" dir="ltr">{cd}</div>
+              <div>
+                <div className="hib-prayer-name">{L(PNAMES_AR[nextP], PNAMES_EN[nextP])}</div>
+                <div className="hib-label">{L("بعد","in")}</div>
               </div>
-              {fastInfo && (
-                <div className="hib-fast">
-                  <div className="hib-fast-ico">🌙</div>
-                  <div className="hib-fast-text">{L("مدة الصوم","Fast")} {fastInfo}</div>
-                </div>
-              )}
+              <div className="hib-time" dir="ltr">{cd}</div>
+              <div style={{width:36,height:36,borderRadius:10,background:"var(--bluebg)",border:"1px solid var(--blue)",display:"flex",alignItems:"center",justifyContent:"center",fontSize:18,flexShrink:0}}>
+                {PICO[nextP]}
+              </div>
             </div>
           )}
           {/* Islamic background strip */}
           <div className="home-bg-strip">
-            <img
-              src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image-Kaaba.jpg/1280px-Image-Kaaba.jpg"
-              alt=""
-              style={{width:"100%",height:"100%",objectFit:"cover"}}
-              onError={e=>{
-                e.target.src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Mosque_of_the_Prophet.jpg/1280px-Mosque_of_the_Prophet.jpg";
-                e.target.onerror=()=>{e.target.style.display="none";};
-              }}
-            />
+            <div className="hbs-inner">
+              <div className="hbs-arch">
+                <div className="hbs-dome"/>
+                <div className="hbs-minarets">
+                  <div className="hbs-minaret"/>
+                  <div className="hbs-minaret hbs-minaret-tall"/>
+                  <div className="hbs-minaret"/>
+                </div>
+              </div>
+              <div className="hbs-stars">
+                {"✦ ✧ ✦ ✧ ✦ ✧ ✦ ✧ ✦ ✧ ✦ ✧".split(" ").map((s,i)=><span key={i} style={{opacity:0.3+Math.random()*0.5,fontSize:i%2===0?10:7}}>{s}</span>)}
+              </div>
+              <div className="hbs-text">
+                <div className="hbs-arabic">اللَّهُ أَكْبَرُ</div>
+                <div className="hbs-sub">سبحان الله وبحمده</div>
+              </div>
+            </div>
             <div className="home-bg-strip-overlay"/>
           </div>
           {/* Rotating Dua */}
@@ -1305,16 +1271,22 @@ function App() {
             </div>
             {athPlayCat === athCat
               ? <div className="aab-stop" onClick={stopAthAud}>⏹</div>
-              : <div className="aab-play" onClick={()=>{
+              : <div className="aab-play" title={L("تشغيل الفاتحة","Play Al-Fatiha")} onClick={()=>{
                   stopAthAud();
-                  const items = ATHKAR[athCat]||[];
-                  if(!items.length) return;
-                  // Play a Quran ayah as background recitation (ayah 1 of Al-Fatiha area)
-                  const a = new Audio(ATH_AUDIO_SHEIKHS[athShIdx].url+"/1.mp3");
-                  a.volume=0.4;
-                  a.play().catch(()=>{});
-                  setAthAud(a); setAthPlayCat(athCat);
-                  msg(L("جاري التشغيل","Playing..."));
+                  // Play Al-Fatiha (ayahs 1-7) sequentially as background recitation
+                  const ayahNums=[1,2,3,4,5,6,7];
+                  let idx=0;
+                  const playNext=()=>{
+                    if(idx>=ayahNums.length) return;
+                    const a=new Audio(ATH_AUDIO_SHEIKHS[athShIdx].url+"/"+ayahNums[idx]+".mp3");
+                    a.onended=()=>{idx++;playNext();};
+                    a.onerror=()=>{idx++;playNext();};
+                    a.play().catch(()=>{});
+                    if(idx===0){setAthAud(a);setAthPlayCat(athCat);}
+                    idx++;
+                  };
+                  playNext();
+                  msg(L("🎵 تشغيل سورة الفاتحة","🎵 Playing Al-Fatiha"));
                 }}>▶</div>
             }
           </div>

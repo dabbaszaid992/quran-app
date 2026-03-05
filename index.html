@@ -46,48 +46,85 @@ body{font-family:var(--ui);color:var(--ink);direction:rtl}
 .tb-title{font-family:var(--ar);font-size:17px;font-weight:700;color:var(--ink);text-align:center;line-height:1.2}
 .tb-sub{font-size:11px;color:var(--gold);text-align:center;font-family:var(--ar);margin-top:1px;opacity:0.75}
 
-/* ── HOME ── */
-.home-prayer{overflow:hidden;background:linear-gradient(180deg,#9ad8e8 0%,#c4eef4 40%,#e0f4f6 65%,var(--bg2) 100%);padding:12px 12px 0}
-.dark .home-prayer{background:linear-gradient(180deg,#071820 0%,#0c2030 40%,#102030 65%,var(--bg2) 100%)}
-.hp-city{text-align:center;font-size:17px;font-weight:900;color:var(--ink);margin-bottom:10px;font-family:var(--ui)}
-.hp-row{display:flex;align-items:flex-end;justify-content:center;gap:5px}
-.hp-pill{flex:1;background:rgba(255,255,255,0.52);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,0.68);border-radius:10px 10px 0 0;padding:9px 4px 11px;text-align:center;transition:all 0.18s}
-.dark .hp-pill{background:rgba(255,255,255,0.07);border-color:rgba(255,255,255,0.1)}
-.hp-pill.act{background:white;border-color:white;box-shadow:0 -2px 14px rgba(0,0,0,0.1);padding-top:13px}
-.dark .hp-pill.act{background:rgba(255,255,255,0.14)}
-.hpp-name{font-size:10px;font-weight:700;color:var(--ink3);margin-bottom:2px;font-family:var(--ui)}
-.hp-pill.act .hpp-name{color:var(--ink2)}
-.hpp-time{font-size:13px;font-weight:900;color:var(--ink);font-family:var(--en);direction:ltr}
-.hp-center{flex:1.15;background:white;border:1.5px solid var(--bdr);border-radius:12px 12px 0 0;padding:10px 5px 11px;text-align:center;box-shadow:0 -3px 16px rgba(0,0,0,0.08)}
-.dark .hp-center{background:var(--card2)}
-.hpc-day{font-family:var(--ar);font-size:20px;font-weight:700;color:var(--gold);line-height:1.2}
-.hpc-month{font-family:var(--ar);font-size:11px;color:var(--gold2);font-weight:600}
+/* ══ HOME SCREEN - REDESIGNED ══ */
 
-/* Countdown + fast duration row */
-.home-info-bar{background:var(--card);border-bottom:1px solid var(--bdr);padding:10px 16px;display:flex;align-items:center;justify-content:space-between;direction:rtl;gap:10px}
-.hib-prayer-name{font-family:var(--ui);font-size:15px;font-weight:900;color:var(--blue)}
-.hib-label{font-family:var(--ui);font-size:12px;font-weight:700;color:var(--ink3)}
-.hib-time{font-family:var(--en);font-size:22px;font-weight:900;color:var(--blue);direction:ltr;letter-spacing:1px;flex:1;text-align:center}
-.hib-fast-ico{font-size:16px;flex-shrink:0}
-.hib-fast-text{font-family:var(--ui);font-size:11px;font-weight:700;color:var(--orange);line-height:1.35}
+/* ── Section Headers ── */
+.sec-hdr{padding:16px 16px 8px;display:flex;align-items:center;justify-content:space-between;direction:rtl}
+.sec-hdr-title{font-family:var(--ui);font-size:11px;font-weight:700;color:var(--ink3);letter-spacing:1.5px;text-transform:uppercase;display:flex;align-items:center;gap:6px}
+.sec-hdr-title::before{content:'';width:3px;height:13px;background:var(--gold);border-radius:2px;flex-shrink:0}
+.sec-hdr-action{font-size:11px;font-weight:700;color:var(--blue);cursor:pointer;font-family:var(--ui)}
 
-/* Rotating dua bar */
-.home-dua-bar{background:var(--goldbg);border-bottom:1.5px solid var(--bdr2);padding:9px 14px;display:flex;align-items:center;gap:10px;cursor:pointer}
-.hdb-label{font-size:9px;font-weight:700;color:var(--gold);letter-spacing:2px;text-transform:uppercase;font-family:var(--en);flex-shrink:0}
-.hdb-text{font-family:var(--ar);font-size:15px;color:var(--ink2);flex:1;direction:rtl;line-height:1.5;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.hdb-arrow{font-size:13px;color:var(--gold2);flex-shrink:0}
+/* ── HERO: Next Prayer ── */
+.next-prayer-hero{margin:12px 12px 0;border-radius:20px;overflow:hidden;background:linear-gradient(135deg,#0e2248 0%,#1a3a78 50%,#0d2050 100%);padding:20px 20px 18px;position:relative;direction:rtl;box-shadow:0 4px 20px rgba(26,58,120,0.3)}
+.dark .next-prayer-hero{background:linear-gradient(135deg,#080e20 0%,#0e2040 50%,#060c18 100%);box-shadow:0 4px 20px rgba(0,0,0,0.5)}
+.nph-glow{position:absolute;top:-30px;left:-20px;width:140px;height:140px;border-radius:50%;background:radial-gradient(circle,rgba(255,200,60,0.15),transparent 70%);pointer-events:none}
+.nph-stars{position:absolute;top:0;right:0;bottom:0;left:0;background:radial-gradient(ellipse 50% 60% at 85% 15%,rgba(255,255,255,0.05),transparent);pointer-events:none}
+.nph-location{font-family:var(--ui);font-size:11px;font-weight:600;color:rgba(255,255,255,0.5);margin-bottom:14px;display:flex;align-items:center;gap:5px}
+.nph-location-dot{width:5px;height:5px;border-radius:50%;background:rgba(100,200,120,0.8);flex-shrink:0}
+.nph-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:4px}
+.nph-lbl{font-family:var(--ui);font-size:11px;font-weight:700;color:rgba(255,255,255,0.55);letter-spacing:1.5px;text-transform:uppercase}
+.nph-name{font-family:var(--ui);font-size:26px;font-weight:900;color:#fff;line-height:1.1;margin-bottom:4px}
+.nph-sub{font-family:var(--ui);font-size:12px;font-weight:600;color:rgba(255,255,255,0.55);margin-bottom:14px}
+.nph-cd{font-family:var(--en);font-size:46px;font-weight:900;color:#fff;direction:ltr;letter-spacing:2px;line-height:1;margin-bottom:14px;text-shadow:0 2px 12px rgba(0,0,0,0.3)}
+.nph-ico{width:46px;height:46px;border-radius:14px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.15);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
+.nph-progress{height:3px;background:rgba(255,255,255,0.12);border-radius:3px;overflow:hidden;margin-bottom:14px}
+.nph-prog-fill{height:100%;border-radius:3px;background:linear-gradient(90deg,rgba(255,200,60,0.7),rgba(255,255,255,0.9))}
+.nph-hijri{font-family:var(--ar);font-size:13px;color:rgba(255,255,255,0.5);text-align:left;direction:rtl}
 
-/* HOME GRID - improved layout */
-.home-grid{padding:10px 10px 10px}
-.hg-row{display:flex;gap:8px;margin-bottom:8px}
-.hg-card{flex:1;background:var(--card);border:1.5px solid var(--bdr);border-radius:16px;padding:13px 10px 11px;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;transition:all 0.18s;box-shadow:0 1px 7px var(--shd);position:relative;overflow:hidden;gap:5px;text-align:center;min-height:80px}
-.hg-card:active{transform:scale(0.95);border-color:var(--gold)}
-.hg-card.feat{border-color:var(--bdr2);background:var(--goldbg)}
-.hg-ico{font-size:20px}
-.hg-title{font-family:var(--ar);font-size:14px;font-weight:700;color:var(--gold);line-height:1.2}
-.hg-sub{font-size:10px;color:var(--ink4);font-family:var(--ui)}
-.hg-num{position:absolute;left:7px;bottom:5px;font-size:13px;font-weight:900;color:rgba(0,0,0,0.05);font-family:var(--en)}
-.dark .hg-num{color:rgba(255,255,255,0.05)}
+/* ── PRAYER TIMES STRIP ── */
+.prayer-strip{margin:10px 12px 0;display:flex;gap:6px}
+.ps-card{flex:1;background:var(--card);border:1.5px solid var(--bdr);border-radius:14px;padding:10px 5px;text-align:center;transition:all 0.18s;position:relative}
+.ps-card.nxt{background:var(--bluebg);border-color:var(--blue);box-shadow:0 2px 10px rgba(26,80,160,0.15)}
+.dark .ps-card.nxt{background:#080e1e;border-color:var(--blue)}
+.ps-card-name{font-family:var(--ui);font-size:9.5px;font-weight:700;color:var(--ink3);margin-bottom:4px}
+.ps-card.nxt .ps-card-name{color:var(--blue)}
+.ps-card-time{font-family:var(--en);font-size:13px;font-weight:900;color:var(--ink);direction:ltr}
+.ps-card.nxt .ps-card-time{color:var(--blue)}
+.ps-nxt-dot{position:absolute;top:5px;left:50%;transform:translateX(-50%);width:5px;height:5px;border-radius:50%;background:var(--blue)}
+
+/* ── RAMADAN CARD ── */
+.ram-home-card{margin:10px 12px 0;background:var(--card);border:1.5px solid var(--bdr2);border-radius:18px;padding:14px 16px;box-shadow:0 2px 10px var(--shd);direction:rtl;position:relative;overflow:hidden}
+.ram-home-card::before{content:'';position:absolute;top:0;right:0;width:80px;height:80px;background:radial-gradient(circle at top right,rgba(160,120,48,0.08),transparent 70%);pointer-events:none}
+.rhc-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.rhc-title{font-family:var(--ui);font-size:13px;font-weight:700;color:var(--ink2);display:flex;align-items:center;gap:7px}
+.rhc-badge{background:linear-gradient(135deg,#1a0838,#2a1060);color:rgba(255,255,255,0.85);font-size:9px;font-weight:700;padding:3px 9px;border-radius:20px;font-family:var(--ui)}
+.rhc-remaining{font-family:var(--ui);font-size:15px;font-weight:900;color:var(--orange);margin-bottom:8px}
+.rhc-bar{height:8px;background:var(--bg2);border-radius:8px;overflow:hidden;margin-bottom:7px}
+.rhc-fill{height:100%;border-radius:8px;background:linear-gradient(90deg,#1a3880,#c04018)}
+.rhc-times{display:flex;justify-content:space-between;font-size:11px;font-family:var(--ui);font-weight:600}
+.rhc-s{color:#1a3880}.rhc-i{color:#c04018}
+
+/* ── QURAN / LAST READ ── */
+.quran-home-card{margin:10px 12px 0;background:var(--goldbg);border:1.5px solid var(--bdr2);border-radius:18px;padding:14px 16px;box-shadow:0 2px 10px var(--shd);direction:rtl;position:relative;overflow:hidden}
+.qhc-label{font-size:10px;font-weight:700;color:var(--gold);letter-spacing:2px;text-transform:uppercase;font-family:var(--en);margin-bottom:7px;display:flex;align-items:center;gap:6px}
+.qhc-label::after{content:'';flex:1;height:1px;background:var(--bdr2)}
+.qhc-surah{font-family:var(--ar);font-size:22px;font-weight:700;color:var(--ink);margin-bottom:3px}
+.qhc-meta{font-size:11px;color:var(--ink3);margin-bottom:12px;font-family:var(--ui)}
+.qhc-btns{display:flex;gap:8px}
+.qhc-btn-main{flex:1;background:linear-gradient(135deg,var(--gold),var(--gold2));color:#fff;border:none;border-radius:11px;padding:10px;font-size:13px;font-weight:700;font-family:var(--ui);cursor:pointer;text-align:center}
+.qhc-btn-main:active{opacity:0.85}
+.qhc-btn-sec{background:var(--bg2);border:1.5px solid var(--bdr);border-radius:11px;padding:10px 12px;font-size:13px;font-weight:700;font-family:var(--ui);color:var(--ink2);cursor:pointer;white-space:nowrap}
+.qhc-btn-sec:active{background:var(--bg3)}
+
+/* ── QUICK ACTIONS GRID ── */
+.qa-sec{margin:10px 12px 0}
+.qa-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.qa-card{background:var(--card);border:1.5px solid var(--bdr);border-radius:14px;padding:13px 8px 11px;display:flex;flex-direction:column;align-items:center;gap:5px;cursor:pointer;transition:all 0.16s;box-shadow:0 1px 6px var(--shd);text-align:center;min-height:76px}
+.qa-card:active{transform:scale(0.94);border-color:var(--gold)}
+.qa-ico{font-size:22px}
+.qa-title{font-family:var(--ar);font-size:12.5px;font-weight:700;color:var(--ink2);line-height:1.2}
+.qa-sub{font-size:9.5px;color:var(--ink4);font-family:var(--ui)}
+
+/* ── DUA TICKER ── */
+.dua-ticker{margin:10px 12px 0;background:var(--card);border:1px solid var(--bdr);border-radius:14px;padding:11px 14px;display:flex;align-items:center;gap:10px;cursor:pointer;box-shadow:0 1px 5px var(--shd)}
+.dt-icon{width:34px;height:34px;border-radius:10px;background:var(--goldbg);border:1px solid var(--bdr2);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.dt-content{flex:1;min-width:0}
+.dt-label{font-size:9px;font-weight:700;color:var(--gold);letter-spacing:2px;text-transform:uppercase;font-family:var(--en);margin-bottom:3px}
+.dt-text{font-family:var(--ar);font-size:14px;color:var(--ink2);line-height:1.4;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;direction:rtl}
+.dt-arrow{font-size:12px;color:var(--ink4);flex-shrink:0}
+
+/* ── HOME GRID - removed, replaced by qa-grid ── */
+.hg-fast-card{display:none}
 
 /* ── SURAH LIST ── */
 .list-topbar{flex-shrink:0;background:var(--card);border-bottom:1px solid var(--bdr);padding:7px 12px;display:flex;align-items:center;gap:7px}
@@ -761,6 +798,44 @@ function RamadanPage({pt, isAr, tDone, setTDone, kDone, setKDone}) {
   );
 }
 
+function RamadanHomeCard({pt, isAr}) {
+  const L = (ar, en) => isAr ? ar : en;
+  const fp = pt.Fajr.split(":").map(Number);
+  const mp = pt.Maghrib.split(":").map(Number);
+  const now = new Date();
+  const nm = now.getHours() * 60 + now.getMinutes();
+  const sm = fp[0] * 60 + fp[1];
+  const em = mp[0] * 60 + mp[1];
+  const pct = Math.max(0, Math.min(100, ((nm - sm) / (em - sm)) * 100));
+  const isFasting = nm >= sm && nm < em;
+  const afterIftar = nm >= em;
+  const remMins = isFasting ? em - nm : 0;
+  const remH = Math.floor(remMins / 60);
+  const remM = remMins % 60;
+  const toFajrMins = nm < sm ? sm - nm : (24 * 60 - nm + sm);
+  const toFajrH = Math.floor(toFajrMins / 60);
+  const toFajrM = toFajrMins % 60;
+  const statusText = afterIftar
+    ? L("🎉 حان وقت الإفطار", "🎉 Iftar time!")
+    : isFasting
+      ? L("متبقي على الإفطار: " + remH + " س " + remM + " د", "Remaining: " + remH + "h " + remM + "m")
+      : L("متبقي على الإمساك: " + toFajrH + " س " + toFajrM + " د", "To Suhoor: " + toFajrH + "h " + toFajrM + "m");
+  return (
+    <div className="ram-home-card">
+      <div className="rhc-header">
+        <div className="rhc-title">🌙 {L("رمضان المبارك","Blessed Ramadan")}</div>
+        <div className="rhc-badge">{L("١٤٤٧ هـ","1447 AH")}</div>
+      </div>
+      <div className="rhc-remaining">{statusText}</div>
+      <div className="rhc-bar"><div className="rhc-fill" style={{width:pct+"%"}}/></div>
+      <div className="rhc-times">
+        <span className="rhc-s">🌅 {L("الإمساك","Suhoor")} {pt.Fajr}</span>
+        <span className="rhc-i">🌇 {L("الإفطار","Iftar")} {pt.Maghrib}</span>
+      </div>
+    </div>
+  );
+}
+
 function App() {
   const [tab, setTab] = useState("home");
   const [stab, setStab] = useState("surahs");
@@ -787,6 +862,7 @@ function App() {
   const [athCat, setAthCat] = useState(null);
   const [zCounts, setZCounts] = useState({});
   const [tDone, setTDone] = useState([]);
+  const [lastRead, setLastRead] = useState(null);
   const [kDone, setKDone] = useState([]);
   const [duaIdx, setDuaIdx] = useState(0);
   const [reminders, setReminders] = useState({Fajr:true,Dhuhr:true,Asr:true,Maghrib:true,Isha:true});
@@ -835,6 +911,7 @@ function App() {
 
   const openSurah = async (s) => {
     setSurah(s); setTab("reader"); setVerses([]); setTrans([]);
+    setLastRead({n:s.n, arShort:s.arShort, en:s.en, ayah:1});
     setLoading(true); stopAudio(); setSelV(null);
     if (pageRef.current) pageRef.current.scrollTop = 0;
     try {
@@ -950,13 +1027,24 @@ function App() {
   };
 
   const curDua = ROTATING_DUAS[duaIdx];
+  const dayProgPct = (() => {
+    if (!pt || !nextP) return 0;
+    const now = new Date().getHours() * 60 + new Date().getMinutes();
+    const idx = PRAYERS_MAIN.indexOf(nextP);
+    const prevP = idx > 0 ? pt[PRAYERS_MAIN[idx-1]] : pt["Isha"];
+    const pm = prevP.split(":").map(Number);
+    const nm2 = pt[nextP].split(":").map(Number);
+    const start = pm[0]*60+pm[1]; const end = nm2[0]*60+nm2[1];
+    const elapsed = end > start ? (now-start)/(end-start)*100 : (now<end ? (24*60+now-start)/(24*60+end-start)*100 : 100);
+    return Math.max(0, Math.min(100, elapsed));
+  })();
 
   const NAV = [
     {id:"home",      ico:"🏠",ar:"الرئيسية",en:"Home"},
     {id:"surahlist", ico:"📖",ar:"المصحف",  en:"Quran"},
     {id:"athkar",    ico:"🤲",ar:"الأذكار",  en:"Athkar"},
-    {id:"ramadan",   ico:"🌙",ar:"رمضان",    en:"Ramadan"},
     {id:"prayer",    ico:"🕌",ar:"الصلاة",   en:"Prayer"},
+    {id:"settings_drawer", ico:"⚙️",ar:"الإعدادات",en:"Settings"},
   ];
 
   const pageTitle = () => {
@@ -981,9 +1069,8 @@ function App() {
       {/* TOPBAR */}
       <div className="topbar">
         <div className="tb-g">
-          <div className="tb-ico" onClick={() => setDrawer(true)}>⚙️</div>
-          <div className="tb-ico" onClick={() => setTab("surahlist")}>🔍</div>
-          <div className="tb-ico" onClick={() => setTab("bookmarks")}>🔖</div>
+          <div className="tb-ico" title={L("بحث","Search")} onClick={() => setTab("surahlist")}>🔍</div>
+          <div className="tb-ico" title={L("المحفوظات","Bookmarks")} onClick={() => setTab("bookmarks")}>🔖</div>
         </div>
         <div className="tb-center">
           <div className="tb-title">{pageTitle()}</div>
@@ -997,91 +1084,119 @@ function App() {
 
       {/* HOME */}
       {tab === "home" && (
-        <div className="scroll su">
-          {/* Prayer strip */}
-          <div className="home-prayer">
-            <div className="hp-city">{L("دبي، الإمارات 🌤","Dubai, UAE 🌤")}</div>
-            <div className="hp-row">
-              {pt && <div className={"hp-pill"+(nextP==="Fajr"?" act":"")}><div className="hpp-name">{L(PNAMES_AR.Fajr,PNAMES_EN.Fajr)}</div><div className="hpp-time" dir="ltr">{pt.Fajr}</div></div>}
-              {pt && <div className={"hp-pill"+(nextP==="Dhuhr"?" act":"")}><div className="hpp-name">{L(PNAMES_AR.Dhuhr,PNAMES_EN.Dhuhr)}</div><div className="hpp-time" dir="ltr">{pt.Dhuhr}</div></div>}
-              <div className="hp-center"><div className="hpc-day">{new Date().getDate()}</div><div className="hpc-month">{hijri.split(" ")[1]||"رمضان"}</div></div>
-              {pt && <div className={"hp-pill"+(nextP==="Asr"?" act":"")}><div className="hpp-name">{L(PNAMES_AR.Asr,PNAMES_EN.Asr)}</div><div className="hpp-time" dir="ltr">{pt.Asr}</div></div>}
-              {pt && <div className={"hp-pill"+(nextP==="Maghrib"?" act":"")}><div className="hpp-name">{L(PNAMES_AR.Maghrib,PNAMES_EN.Maghrib)}</div><div className="hpp-time" dir="ltr">{pt.Maghrib}</div></div>}
+        <div className="scroll su" style={{paddingBottom:16}}>
+
+          {/* ── 1. NEXT PRAYER HERO ── */}
+          {pt && nextP ? (
+            <div className="next-prayer-hero">
+              <div className="nph-glow"/><div className="nph-stars"/>
+              <div className="nph-location">
+                <div className="nph-location-dot"/>
+                {L("دبي، الإمارات","Dubai, UAE")}
+              </div>
+              <div className="nph-top">
+                <div>
+                  <div className="nph-lbl">{L("الوقت المتبقي لصلاة","Time remaining for")}</div>
+                  <div className="nph-name">{L(PNAMES_AR[nextP], PNAMES_EN[nextP])}</div>
+                </div>
+                <div className="nph-ico">{PICO[nextP]}</div>
+              </div>
+              <div className="nph-cd" dir="ltr">{cd}</div>
+              <div className="nph-progress">
+                <div className="nph-prog-fill" style={{width:dayProgPct+"%"}}/>
+              </div>
+              <div className="nph-hijri">{hijri}</div>
             </div>
-          </div>
-          {/* Countdown bar - full width */}
-          {pt && nextP && (
-            <div className="home-info-bar">
-              <div>
-                <div className="hib-prayer-name">{L(PNAMES_AR[nextP], PNAMES_EN[nextP])}</div>
-                <div className="hib-label">{L("بعد","in")}</div>
-              </div>
-              <div className="hib-time" dir="ltr">{cd}</div>
-              <div style={{width:36,height:36,borderRadius:10,background:"var(--bluebg)",border:"1px solid var(--blue)",display:"flex",alignItems:"center",justifyContent:"center",fontSize:18,flexShrink:0}}>
-                {PICO[nextP]}
-              </div>
+          ) : (
+            <div className="next-prayer-hero">
+              <div className="nph-glow"/>
+              <div className="nph-location"><div className="nph-location-dot"/>{L("دبي، الإمارات","Dubai, UAE")}</div>
+              <div className="nph-name" style={{color:"rgba(255,255,255,0.5)",fontSize:18}}>{L("جاري تحميل المواقيت...","Loading times...")}</div>
+              <div className="nph-cd" dir="ltr" style={{fontSize:32,opacity:0.4}}>--:--:--</div>
             </div>
           )}
-          {/* Islamic background strip */}
-          <div className="home-bg-strip">
-            <div className="hbs-inner">
-              <div className="hbs-arch">
-                <div className="hbs-dome"/>
-                <div className="hbs-minarets">
-                  <div className="hbs-minaret"/>
-                  <div className="hbs-minaret hbs-minaret-tall"/>
-                  <div className="hbs-minaret"/>
-                </div>
+
+          {/* ── 2. PRAYER TIMES STRIP ── */}
+          <div className="prayer-strip">
+            {pt && PRAYERS_MAIN.map(p=>(
+              <div key={p} className={"ps-card"+(nextP===p?" nxt":"")}>
+                {nextP===p && <div className="ps-nxt-dot"/>}
+                <div className="ps-card-name">{L(PNAMES_AR[p],PNAMES_EN[p])}</div>
+                <div className="ps-card-time" dir="ltr">{pt[p]?pt[p].split(":").slice(0,2).join(":"):"--"}</div>
               </div>
-              <div className="hbs-stars">
-                {"✦ ✧ ✦ ✧ ✦ ✧ ✦ ✧ ✦ ✧ ✦ ✧".split(" ").map((s,i)=><span key={i} style={{opacity:0.3+Math.random()*0.5,fontSize:i%2===0?10:7}}>{s}</span>)}
-              </div>
-              <div className="hbs-text">
-                <div className="hbs-arabic">اللَّهُ أَكْبَرُ</div>
-                <div className="hbs-sub">سبحان الله وبحمده</div>
-              </div>
-            </div>
-            <div className="home-bg-strip-overlay"/>
+            ))}
           </div>
-          {/* Rotating Dua */}
-          <div className="home-dua-bar" onClick={() => setTab("athkar")}>
-            <div className="hdb-label">DUA</div>
-            <div className="hdb-text">{curDua.ar}</div>
-            <div className="hdb-arrow">←</div>
-          </div>
-          {/* Home grid */}
-          <div className="home-grid">
-            {/* المصحف - wide alone */}
-            <div className="hg-row">
-              <div className="hg-card hg-wide feat" onClick={()=>setTab("surahlist")}>
-                <div className="hg-ico">📖</div>
-                <div className="hg-title">{L("المصحف الشريف","The Holy Quran")}</div>
-                <div className="hg-sub">{L("١١٤ سورة · ٦٢٣٦ آية","114 Surahs · 6236 Ayahs")}</div>
-              </div>
+
+          {/* ── 3. RAMADAN FASTING CARD ── */}
+          {pt && <RamadanHomeCard pt={pt} isAr={isAr} />}
+
+          {/* ── 4. QURAN / LAST READ ── */}
+          <div className="quran-home-card">
+            <div className="qhc-label">📖 {L("آخر قراءة","Last Read")}</div>
+            <div className="qhc-surah">{lastRead ? lastRead.arShort : L("الفاتحة","Al-Fatiha")}</div>
+            <div className="qhc-meta">
+              {lastRead ? L("آية "+lastRead.ayah+" · "+lastRead.en,"Ayah "+lastRead.ayah+" · "+lastRead.en) : L("سورة ١ · الصفحة ١","Surah 1 · Page 1")}
             </div>
-            {/* Fast card - from screenshot */}
-            {pt && (
-              <div className="hg-fast-card">
-                <div className="hgf-title">{L("مدة الصوم: "+Math.floor(((pt.Maghrib.split(":").map(Number)[0]*60+pt.Maghrib.split(":").map(Number)[1])-(pt.Fajr.split(":").map(Number)[0]*60+pt.Fajr.split(":").map(Number)[1]))/60)+" ساعة و "+((pt.Maghrib.split(":").map(Number)[0]*60+pt.Maghrib.split(":").map(Number)[1])-(pt.Fajr.split(":").map(Number)[0]*60+pt.Fajr.split(":").map(Number)[1]))%60+" دقيقة","Fast: "+Math.floor(((pt.Maghrib.split(":").map(Number)[0]*60+pt.Maghrib.split(":").map(Number)[1])-(pt.Fajr.split(":").map(Number)[0]*60+pt.Fajr.split(":").map(Number)[1]))/60)+"h")}</div>
-                <div className="hgf-bar-wrap"><div className="hgf-bar" style={{width:Math.max(0,Math.min(100,((new Date().getHours()*60+new Date().getMinutes()-(pt.Fajr.split(":").map(Number)[0]*60+pt.Fajr.split(":").map(Number)[1]))/((pt.Maghrib.split(":").map(Number)[0]*60+pt.Maghrib.split(":").map(Number)[1])-(pt.Fajr.split(":").map(Number)[0]*60+pt.Fajr.split(":").map(Number)[1])))*100))+"%"}}/></div>
-                <div className="hgf-labels">
-                  <span className="hgf-s">{L("الإمساك","Suhoor")} {pt.Fajr}</span>
-                  <span className="hgf-status">{(new Date().getHours()*60+new Date().getMinutes())>=(pt.Fajr.split(":").map(Number)[0]*60+pt.Fajr.split(":").map(Number)[1])&&(new Date().getHours()*60+new Date().getMinutes())<(pt.Maghrib.split(":").map(Number)[0]*60+pt.Maghrib.split(":").map(Number)[1])?L("🌙 أنت صائم الآن","🌙 Fasting"):""}</span>
-                  <span className="hgf-i">{L("الإفطار","Iftar")} {pt.Maghrib}</span>
-                </div>
-              </div>
-            )}
-            <div className="hg-row">
-              <div className="hg-card" onClick={()=>{setAthCat("morning");setTab("athkar");}}><div className="hg-ico">🌅</div><div className="hg-title">{L("أذكار الصباح","Morning")}</div><div className="hg-sub">{ATHKAR.morning.length+" "+L("ذكر","adhkar")}</div></div>
-              <div className="hg-card" onClick={()=>{setAthCat("evening");setTab("athkar");}}><div className="hg-ico">🌙</div><div className="hg-title">{L("أذكار المساء","Evening")}</div><div className="hg-sub">{ATHKAR.evening.length+" "+L("ذكر","adhkar")}</div></div>
-              <div className="hg-card" onClick={()=>{setAthCat("prayer");setTab("athkar");}}><div className="hg-ico">🤲</div><div className="hg-title">{L("أذكار الصلاة","Prayer")}</div><div className="hg-sub">{ATHKAR.prayer.length+" "+L("ذكر","adhkar")}</div></div>
-            </div>
-            <div className="hg-row">
-              <div className="hg-card" onClick={()=>setTab("ramadan")}><div className="hg-ico">🌙</div><div className="hg-title">{L("رمضان","Ramadan")}</div><div className="hg-sub">{L("١٤٤٧ هـ","1447 AH")}</div></div>
-              <div className="hg-card" onClick={()=>{setAthCat("ramadan");setTab("athkar");}}><div className="hg-ico">🤲</div><div className="hg-title">{L("أدعية رمضان","Ramadan Duas")}</div><div className="hg-sub">{ATHKAR.ramadan.length+" "+L("دعاء","duas")}</div></div>
-              <div className="hg-card" onClick={()=>setTab("prayer")}><div className="hg-ico">🕌</div><div className="hg-title">{L("الصلاة","Prayer")}</div><div className="hg-sub">{L("مواقيت","Times")}</div></div>
+            <div className="qhc-btns">
+              <button className="qhc-btn-main" onClick={()=>openSurah(lastRead?SURAHS[lastRead.n-1]:SURAHS[0])}>
+                {L("متابعة القراءة ←","Continue Reading →")}
+              </button>
+              <button className="qhc-btn-sec" onClick={()=>setTab("surahlist")}>
+                {L("الفهرس","Index")}
+              </button>
             </div>
           </div>
+
+          {/* ── 5. DUA TICKER ── */}
+          <div className="dua-ticker" onClick={()=>setTab("athkar")}>
+            <div className="dt-icon">🤲</div>
+            <div className="dt-content">
+              <div className="dt-label">DUA · دعاء اليوم</div>
+              <div className="dt-text">{curDua.ar}</div>
+            </div>
+            <div className="dt-arrow">←</div>
+          </div>
+
+          {/* ── 6. QUICK ACTIONS ── */}
+          <div className="qa-sec">
+            <div className="sec-hdr">
+              <div className="sec-hdr-title">{L("إجراءات سريعة","Quick Actions")}</div>
+              <div className="sec-hdr-action" onClick={()=>setTab("athkar")}>{L("الكل","All")}</div>
+            </div>
+            <div className="qa-grid">
+              <div className="qa-card" onClick={()=>{setAthCat("morning");setTab("athkar");}}>
+                <div className="qa-ico">🌅</div>
+                <div className="qa-title">{L("أذكار الصباح","Morning")}</div>
+                <div className="qa-sub">{ATHKAR.morning.length} {L("ذكر","adhkar")}</div>
+              </div>
+              <div className="qa-card" onClick={()=>{setAthCat("evening");setTab("athkar");}}>
+                <div className="qa-ico">🌙</div>
+                <div className="qa-title">{L("أذكار المساء","Evening")}</div>
+                <div className="qa-sub">{ATHKAR.evening.length} {L("ذكر","adhkar")}</div>
+              </div>
+              <div className="qa-card" onClick={()=>{setAthCat("sleep");setTab("athkar");}}>
+                <div className="qa-ico">😴</div>
+                <div className="qa-title">{L("أذكار النوم","Sleep")}</div>
+                <div className="qa-sub">{ATHKAR.sleep.length} {L("ذكر","adhkar")}</div>
+              </div>
+              <div className="qa-card" onClick={()=>{setAthCat("prayer");setTab("athkar");}}>
+                <div className="qa-ico">🤲</div>
+                <div className="qa-title">{L("أذكار الصلاة","Prayer")}</div>
+                <div className="qa-sub">{ATHKAR.prayer.length} {L("ذكر","adhkar")}</div>
+              </div>
+              <div className="qa-card" onClick={()=>{setAthCat("ramadan");setTab("athkar");}}>
+                <div className="qa-ico">☪️</div>
+                <div className="qa-title">{L("أدعية رمضان","Ramadan")}</div>
+                <div className="qa-sub">{ATHKAR.ramadan.length} {L("دعاء","duas")}</div>
+              </div>
+              <div className="qa-card" onClick={()=>setTab("ramadan")}>
+                <div className="qa-ico">📿</div>
+                <div className="qa-title">{L("رمضان","Ramadan")}</div>
+                <div className="qa-sub">{L("متابعة","Track")}</div>
+              </div>
+            </div>
+          </div>
+
         </div>
       )}
 
@@ -1188,7 +1303,7 @@ function App() {
                     <span key={v.number}
                       ref={el=>{if(el)ayRefs.current[v.numberInSurah]=el;}}
                       className={"aspan"+(playV===v.numberInSurah?" play":"")+(selV===v.numberInSurah?" sel":"")}
-                      onClick={()=>setSelV(p=>p===v.numberInSurah?null:v.numberInSurah)}>
+                      onClick={()=>{setSelV(p=>p===v.numberInSurah?null:v.numberInSurah);if(surah)setLastRead({n:surah.n,arShort:surah.arShort,en:surah.en,ayah:v.numberInSurah});}}>
                       {v.text}{" "}
                       <span className={"anum"+(playV===v.numberInSurah?" playing":"")}
                         onClick={e=>{e.stopPropagation();playAyah(v.numberInSurah,v.number,verses);}}>
@@ -1378,8 +1493,8 @@ function App() {
       <div className="bnav">
         {NAV.map(n=>(
           <div key={n.id}
-            className={"bni"+((tab===n.id||(tab==="reader"&&n.id==="surahlist"))?" on":"")}
-            onClick={()=>{stopAudio();if(n.id!=="athkar")setAthCat(null);setTab(n.id);}}>
+            className={"bni"+((n.id!=="settings_drawer"&&(tab===n.id||(tab==="reader"&&n.id==="surahlist")))?" on":"")}
+            onClick={()=>{if(n.id==="settings_drawer"){setDrawer(true);return;}stopAudio();if(n.id!=="athkar")setAthCat(null);setTab(n.id);}}>
             <span className="bni-pip"/>
             <span className="bni-ico">{n.ico}</span>
             <span className="bni-lbl">{L(n.ar,n.en)}</span>

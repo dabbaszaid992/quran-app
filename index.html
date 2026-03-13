@@ -1762,7 +1762,9 @@ body {
 const {useState, useEffect, useRef} = React;
 const API = "https://api.alquran.cloud/v1";
 const BISM = "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ";
-const BISM_STRIP_RX = /^بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ\s*|^بسم الله الرحمن الرحيم\s*/;
+// Strip bismillah from verse 1 — matches all Unicode diacritic variants
+// The API embeds bismillah at start of every surah's verse 1 (except Fatiha which IS bismillah)
+const BISM_STRIP_RX = /^[\u0628][\u0650]?[\u0633][\u0652]?[\u0645][\u0650\u064E\u064F]?\s+[\u0627\u0644\u0644\u0651\u064E\u0647][^\u0631]*[\u0631][\u064E\u0651\u064B\u064C\u064D\u0650\u0652\u0640]*[\u062D][\u064E\u0651\u064B\u064C\u064D\u0650\u0652\u0640]*[\u064A][\u0645][\u0650\u064E\u064F\u0651]?\s*/;
 
 const SHEIKHS = [
   {id:"afasy",   ar:"العفاسي",  en:"Al-Afasy",   url:"https://cdn.islamic.network/quran/audio/128/ar.alafasy"},
@@ -2179,6 +2181,42 @@ function RamadanPage({pt, L, tDone, setTDone, kDone, setKDone}){
   );
 }
 
+/* ── stripBismillah: removes bismillah from start of verse text ──
+   The alquran.cloud API always includes bismillah at the start of verse 1
+   for every surah. Since we render it separately as a decorative block,
+   we strip it here. We use a robust approach that handles all diacritic variants:
+   strip everything up to and including the last word that looks like رحيم.
+   ── */
+function stripBismillah(text) {
+  if (!text) return text;
+  // The bismillah is always the opening ~4 words ending in a form of الرحيم
+  // We detect it by looking for بسم as the first non-space word (bare or fully diacritised)
+  // and strip everything up to and including the next occurrence of رحيم + diacritics
+  const bare = text.replace(/[ً-ٰٟ]/g, ""); // strip all harakat
+  // Does this text start with بسم or بِسْمِ?
+  const startsWithBism = /^\s*بسم/.test(bare);
+  if (!startsWithBism) return text;
+  // Find index of رحيم (bare) in the original text and strip up to that point + the word
+  // Approach: find last harakat-stripped رحيم within first 80 chars, then cut after it
+  let cutIdx = -1;
+  // Walk through text finding رحيم (possibly with diacritics between letters)
+  // Build a regex that matches ر + any diacritics + ح + diacritics + ي + diacritics + م + diacritics + any final diacritics + whitespace?
+  const rahimRx = /ر[ً-ٰٟ]*ح[ً-ٰٟ]*ي[ً-ٰٟ]*م[ً-ٰٟ]*/;
+  const m = text.match(rahimRx);
+  if (m && m.index < 80) {
+    cutIdx = m.index + m[0].length;
+    // Also skip any trailing whitespace/diacritics after الرحيم
+    while (cutIdx < text.length && (text[cutIdx] === " " || text[cutIdx] === " " || (text.charCodeAt(cutIdx) >= 0x064B && text.charCodeAt(cutIdx) <= 0x065F))) {
+      cutIdx++;
+    }
+  }
+  if (cutIdx > 0) return text.slice(cutIdx).trim();
+  // Fallback: try common plain-text variants
+  return text
+    .replace(/^بسم الله الرحمن الرحيم\s*/u, "")
+    .trim();
+}
+
 /* ══════════════════════ APP ══════════════════════ */
 function App(){
   const [tab,setTab]   = useState("home");
@@ -2281,8 +2319,9 @@ function App(){
       ]);
       const ayahs = aRes.data?.ayahs||[];
       const engs  = eRes.data?.ayahs||[];
-      if(s.n!==1 && s.n!==9 && ayahs.length>0)
-        ayahs[0] = {...ayahs[0], text: ayahs[0].text.replace(BISM_STRIP_RX,"").trim()};
+      if(s.n!==1 && s.n!==9 && ayahs.length>0){
+        ayahs[0] = {...ayahs[0], text: stripBismillah(ayahs[0].text)};
+      }
       setVerses(ayahs);setTrans(engs);
     }catch(e){msg(L("فشل التحميل","Load failed"));}
     setLoading(false);
